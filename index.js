@@ -109,7 +109,7 @@ bot.on('document', (ctx) => {
 //bot.launch()
 module.exports = bot
 
-//web: micro-bot -p $PORT
+//web: micro-bot -p $PORT => tried to change it to worker dyno => 
 //Server ID - aqueous-cove-61595
 //Server URL - https://aqueous-cove-61595.herokuapp.com/
 
