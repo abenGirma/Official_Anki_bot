@@ -53,9 +53,9 @@ listDownloadFiles();
 
 bot.action('Download', (ctx) => {
   var id = ctx.chat.id; 
-  ctx.deleteMessage();
+  //ctx.deleteMessage();
 
-  listDownloadFiles().then(async (result) => {
+  listDownloadFiles().then((result) => {
     var NumOfResults = result.length;
    
     ctx.telegram.sendMessage(id, "Available Anki Files" +  "\n"  + result, {
