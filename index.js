@@ -4,11 +4,11 @@ const {google} = require('googleapis');
 const { drive } = require('googleapis/build/src/apis/drive');
 
 const axios = require('axios');
-const Telegraf = require('telegraf');
-//const { Composer } = require('micro-bot');
+//const Telegraf = require('telegraf');
+const { Composer } = require('micro-bot');
 
-const bot = new Telegraf('5415929895:AAFFslLBQoeMWzDavZA3HYtMX3wVNDKlq9c');
-//const bot = new Composer
+//const bot = new Telegraf('5415929895:AAFFslLBQoeMWzDavZA3HYtMX3wVNDKlq9c');
+const bot = new Composer
 
 const RestAPIurl = "https://script.google.com/macros/s/AKfycbwE0kSz-GE06Pgs-4CStv6B1l7JnKnel_NUNpgbwtcT-PyyTSHN/exec";
 
@@ -106,12 +106,16 @@ bot.on('document', (ctx) => {
 }
 );
 
-bot.launch()
-//module.exports = bot
+//bot.launch()
+module.exports = bot
 
 //web: micro-bot -p $PORT => tried to change it to worker dyno => 
 //Please work on this!!!! 
 
+//heroku config:set --app ancient-springs-34682 BOT_TOKEN='5415929895:AAFFslLBQoeMWzDavZA3HYtMX3wVNDKlq9c'
+//https://ancient-springs-34682.herokuapp.com/
+//heroku config:set --app ancient-springs-34682 BOT_DOMAIN='https://ancient-springs-34682.herokuapp.com'
+//heroku git:remote -a ancient-springs-34682
 
 //Server ID - aqueous-cove-61595
 //Server URL - https://aqueous-cove-61595.herokuapp.com/
