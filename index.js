@@ -115,7 +115,7 @@ module.exports = bot
 //heroku config:set --app ancient-springs-34682 BOT_TOKEN='5415929895:AAFFslLBQoeMWzDavZA3HYtMX3wVNDKlq9c'
 //https://ancient-springs-34682.herokuapp.com/
 //heroku config:set --app ancient-springs-34682 BOT_DOMAIN='https://ancient-springs-34682.herokuapp.com'
-//heroku git:remote -a ancient-springs-34682
+//heroku git:remote -a ancient-springs-34682 => to change to different heroku app
 
 //Server ID - aqueous-cove-61595
 //Server URL - https://aqueous-cove-61595.herokuapp.com/
