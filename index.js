@@ -57,6 +57,10 @@ bot.action('Download', (ctx) => {
 
   listDownloadFiles().then((result) => {
     var NumOfResults = result.length;
+
+      if(NumOfResults > 20){
+        NumOfResults = 9;
+      }
    
     ctx.telegram.sendMessage(id, "Available Anki Files" +  "\n"  + result, {
               reply_markup: {
