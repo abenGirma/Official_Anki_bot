@@ -4,7 +4,7 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "start": "micro-bot"
+    "start": "index.js"
   },
   "keywords": [],
   "author": "Abenezer Girma",
