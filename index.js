@@ -1,128 +1,137 @@
 const fs = require('fs');
 const path = require('path');
-const {google} = require('googleapis');
+const { google } = require('googleapis');
 const { drive } = require('googleapis/build/src/apis/drive');
 
 require("dotenv").config();
 const axios = require('axios');
-//const Telegraf = require('telegraf');
-const { Composer } = require('micro-bot');
+const Telegraf = require('telegraf');
+//const { Composer } = require('micro-bot');
 
 const token = process.env.Token;
 
-//const bot = new Telegraf(token);
-const bot = new Composer
+const bot = new Telegraf(token);
+//const bot = new Composer
+const answer = `
+🔹🔹🔹🔹*Welcome to Anki-Bot*🔹🔹🔹🔹🔹
 
+📥 *Download* Anki Decks that were sent by our own students *Or* 
+⬆️ Send us your Anki Decks to make your contribution.
+
+/start - To start the bot
+🔹🔹🔹🔹🔹🔹🔹🔹🔹🔹🔹🔹🔹🔹🔹🔹🔹
+`;
 const RestAPIurl = "https://script.google.com/macros/s/AKfycbwE0kSz-GE06Pgs-4CStv6B1l7JnKnel_NUNpgbwtcT-PyyTSHN/exec";
 
 //On the start command, it sends two buttons - Upload and Download
 bot.start((ctx) => {
-    var id = ctx.chat.id; 
+  var id = ctx.chat.id;
 
-    ctx.telegram.sendMessage(id, "Welcome to Anki-Bot!!" + "\n" + "Click on the buttons below to send or download anki files." , {
-        reply_markup: {
-            inline_keyboard: [
-                //[{text: "Upload File", callback_data: "Upload"}],
-                [{text: "Upload File", web_app: {url: "https://script.google.com/macros/s/AKfycbxXrOi3DNIUUSrrXBZYGaX9_QE0JUs0OidHq8_PhTbbU20vtVM/exec"}}],
-                [{text: "Download File", callback_data: "Download"}]
-            ]
-        }
-    });
+  ctx.telegram.sendMessage(id, answer, {
+    parse_mode: "markdown",
+    reply_markup: {
+      inline_keyboard: [
+        //[{text: "Upload File", callback_data: "Upload"}],
+        [{ text: "Upload File", web_app: { url: "https://script.google.com/macros/s/AKfycbxJ0jPC304qgml1GbhhV1jYjKyvpEMmqVUfivLsJ2eIe1WSIlmuS4FkoucRarlhFxR1/exec" } }],
+        [{ text: "Download File", callback_data: "Download" }]
+      ]
+    }
+  });
 
 })
 
 
-async function listDownloadFiles(){
-  let res = await axios.get(RestAPIurl)  
+async function listDownloadFiles() {
+  let res = await axios.get(RestAPIurl)
 
-      result = res.data[0].data;
-      //console.log(result); 
-      fileDescription = result.map((elem, index) => (
-        `
+  result = res.data[0].data;
+  //console.log(result); 
+  fileDescription = result.map((elem, index) => (
+    `
         Result ${index + 1}
-File Name: ${elem.FileName}
-Download Link: ${elem.FileUrl}
+📁 File Name: ${elem.FileName}
+📥 Download Link: ${elem.FileUrl}
 
                 `
-          )
-      );
+  )
+  );
 
-      console.log(fileDescription); 
-      return fileDescription;
+  console.log(fileDescription);
+  return fileDescription;
 }
 
 listDownloadFiles();
 
 
 bot.action('Download', (ctx) => {
-  var id = ctx.chat.id; 
+  var id = ctx.chat.id;
   ctx.deleteMessage();
 
   listDownloadFiles().then((result) => {
     var NumOfResults = result.length;
 
-      if(NumOfResults > 20){
-        NumOfResults = 9;
+    if (NumOfResults > 20) {
+      NumOfResults = 9;
+    }
+
+    ctx.telegram.sendMessage(id, "Available Anki Files" + "\n" + result, {
+      reply_markup: {
+        inline_keyboard: [
+          [{ text: "Back to MainMenu", callback_data: "Main" }]
+        ]
       }
-   
-    ctx.telegram.sendMessage(id, "Available Anki Files" +  "\n"  + result, {
-              reply_markup: {
-                  inline_keyboard: [
-                      [{text: "Back to MainMenu", callback_data: "Main"}]
-                  ]
-              }
-          });
+    });
   });
 
 })
 
 bot.action('Main', (ctx) => {
-  var id = ctx.chat.id; 
+  var id = ctx.chat.id;
   ctx.deleteMessage()
-  ctx.telegram.sendMessage(id, "Welcome to Anki-Bot!!" + "\n" + "Click on the buttons below to send or download anki files." , {
-      parse_mode: "markdown",
-      reply_markup: {
-          inline_keyboard: [
-            [{text: "Upload File", web_app: {url: "https://script.google.com/macros/s/AKfycbxXrOi3DNIUUSrrXBZYGaX9_QE0JUs0OidHq8_PhTbbU20vtVM/exec"}}],
-            [{text: "Download File", callback_data: "Download"}]
-          ]
-      }
+  ctx.telegram.sendMessage(id, answer, {
+    parse_mode: "markdown",
+    reply_markup: {
+      inline_keyboard: [
+        [{ text: "Upload File", web_app: { url: "https://script.google.com/macros/s/AKfycbxJ0jPC304qgml1GbhhV1jYjKyvpEMmqVUfivLsJ2eIe1WSIlmuS4FkoucRarlhFxR1/exec" } }],
+        [{ text: "Download File", callback_data: "Download" }]
+      ]
+    }
   });
 })
 
 
 //Displays Name, Type & Size of the file sent by the user
 bot.on('document', (ctx) => {
-    let file = ctx.update.message.document;
-    let fileName = file.file_name;
-    let Type = file.mime_type;
-    let username = ctx.from.username;
-    let id = ctx.chat.id;
+  let file = ctx.update.message.document;
+  let fileName = file.file_name;
+  let Type = file.mime_type;
+  let username = ctx.from.username;
+  let id = ctx.chat.id;
 
-   
-    fileDescription = {
-        data:   "Name: " + String(file.file_name) + "\n" + 
-                "type: " + String(file.mime_type) + "\n" +
-                "Size: " + String(file.file_size) + "\n"
-    };
 
-    //fileData = fileDescription.data;
-    //console.log(fileData)
-    return ctx.reply("Document received." + "\n" + "Document information: " + "\n" + "\n" + fileData)
+  fileDescription = {
+    data: "Name: " + String(file.file_name) + "\n" +
+      "type: " + String(file.mime_type) + "\n" +
+      "Size: " + String(file.file_size) + "\n"
+  };
+
+  //fileData = fileDescription.data;
+  //console.log(fileData)
+  return ctx.reply("Document received." + "\n" + "Document information: " + "\n" + "\n" + fileData)
 
 }
 );
 
-//bot.launch()
-module.exports = bot
+bot.launch()
+//module.exports = bot
 
-//web: micro-bot -p $PORT => tried to change it to worker dyno => 
-//Please work on this!!!! 
+//web: micro-bot -p $PORT => tried to change it to worker dyno =>
+//Please work on this!!!!
 
 //Windows git "warning: LF will be replaced by CRLF", is that warning tail backward?
 //=>Paste this in Terminal: "git config --global core.autocrlf false"
 
-/*
+/* 
 //createAndUploadFile(auth).catch(console.error)
 
 async function googleDriveFilesList () {
