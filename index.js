@@ -21,7 +21,8 @@ const answer = `
 /start - To start the bot
 🔹🔹🔹🔹🔹🔹🔹🔹🔹🔹🔹🔹🔹🔹🔹🔹🔹
 `;
-const RestAPIurl = "https://script.google.com/macros/s/AKfycbwE0kSz-GE06Pgs-4CStv6B1l7JnKnel_NUNpgbwtcT-PyyTSHN/exec";
+//const RestAPIurl = "https://script.google.com/macros/s/AKfycbwE0kSz-GE06Pgs-4CStv6B1l7JnKnel_NUNpgbwtcT-PyyTSHN/exec";
+const RestAPIurl = process.env.RestApiUrl;
 
 //On the start command, it sends two buttons - Upload and Download
 bot.start((ctx) => {
@@ -32,7 +33,7 @@ bot.start((ctx) => {
     reply_markup: {
       inline_keyboard: [
         //[{text: "Upload File", callback_data: "Upload"}],
-        [{ text: "Upload File", web_app: { url: "https://script.google.com/macros/s/AKfycbxJ0jPC304qgml1GbhhV1jYjKyvpEMmqVUfivLsJ2eIe1WSIlmuS4FkoucRarlhFxR1/exec" } }],
+        [{ text: "Upload File", web_app: { url: "https://script.google.com/macros/s/AKfycbw6fgnrC8pT2kpNtS9_VHHIAnS3XV8dObLW-vwieNUatW5FWaE6xYTW13qmz7s-dMcSNg/exec"} }],
         [{ text: "Download File", callback_data: "Download" }]
       ]
     }
@@ -41,15 +42,19 @@ bot.start((ctx) => {
 })
 
 
-async function listDownloadFiles() {
+async function listFilesByYear(Year) {
   let res = await axios.get(RestAPIurl)
-
   result = res.data[0].data;
   //console.log(result); 
-  fileDescription = result.map((elem, index) => (
+
+  //filesByYear = result.filter((elem) => {return elem.Year.toString().includes(Year) == true});
+  filesByYear = result.filter((elem) => {return elem.Year.toString() == Year});
+
+  fileDescription = filesByYear.map((elem, index) => (
     `
         Result ${index + 1}
 📁 File Name: ${elem.FileName}
+📁 Year: ${elem.Year}
 📥 Download Link: ${elem.FileUrl}
 
                 `
@@ -60,29 +65,118 @@ async function listDownloadFiles() {
   return fileDescription;
 }
 
-listDownloadFiles();
+
 
 
 bot.action('Download', (ctx) => {
   var id = ctx.chat.id;
   ctx.deleteMessage();
 
-  listDownloadFiles().then((result) => {
-    var NumOfResults = result.length;
-
-    if (NumOfResults > 20) {
-      NumOfResults = 9;
-    }
-
-    ctx.telegram.sendMessage(id, "Available Anki Files" + "\n" + result, {
+    ctx.telegram.sendMessage(id, "Choose Year", {
       reply_markup: {
         inline_keyboard: [
-          [{ text: "Back to MainMenu", callback_data: "Main" }]
+          [{text: "PC1", callback_data: "pc1"},{text: "PC2", callback_data:"pc2"}],
+          [{text: "C1", callback_data: "c1"},{text: "C2", callback_data:"c2"}],
+          [{text: "Back to MainMenu", callback_data: "Main"}]
         ]
       }
     });
-  });
+})
 
+bot.action('pc1', (ctx) => {
+  var id = ctx.chat.id;
+  ctx.deleteMessage();
+  var Year = "PC1";
+
+  listFilesByYear(Year)
+  .then((result) =>{
+    var NumOfResults = result.length;
+    if(result.length > 20){
+      result.length = 9;
+    }
+    
+    ctx.telegram.sendMessage(id, "Available PC1 Anki Files" + "\n" + result, {
+      reply_markup: {
+        inline_keyboard: [
+          [{text: "Back to Year", callback_data: "Download" }],
+          [{text: "Back to MainMenu", callback_data: "Main"}]
+        ]
+      }
+    });
+
+  })   
+})
+
+bot.action('pc2', (ctx) => {
+  var id = ctx.chat.id;
+  ctx.deleteMessage();
+  var Year = "PC2";
+
+  listFilesByYear(Year)
+  .then((result) =>{
+    var NumOfResults = result.length;
+    if(result.length > 20){
+      result.length = 9;
+    }
+    
+    ctx.telegram.sendMessage(id, "Available PC2 Anki Files" + "\n" + result, {
+      reply_markup: {
+        inline_keyboard: [
+          [{text: "Back to Year", callback_data: "Download" }],
+          [{text: "Back to MainMenu", callback_data: "Main"}]
+        ]
+      }
+    });
+    
+  })   
+})
+
+bot.action('c1', (ctx) => {
+  var id = ctx.chat.id;
+  ctx.deleteMessage();
+  var Year = "C1";
+
+  listFilesByYear(Year)
+  .then((result) =>{
+    var NumOfResults = result.length;
+    if(result.length > 20){
+      result.length = 9;
+    }
+    
+    ctx.telegram.sendMessage(id, "Available C1 Anki Files" + "\n" + result, {
+      reply_markup: {
+        inline_keyboard: [
+          [{text: "Back to Year", callback_data: "Download" }],
+          [{text: "Back to MainMenu", callback_data: "Main"}]
+        ]
+      }
+    });
+    
+  })   
+})
+
+bot.action('c2', (ctx) => {
+  var id = ctx.chat.id;
+  ctx.deleteMessage();
+  var Year = "C2";
+
+  listFilesByYear(Year)
+  .then((result) =>{
+    var NumOfResults = result.length;
+    if(result.length > 20){
+      result.length = 9;
+    }
+    
+    ctx.telegram.sendMessage(id, "Available C2 Anki Files" + "\n" + result, {
+      reply_markup: {
+        inline_keyboard: [
+          [{text: "Back to Year", callback_data: "Download" }],
+          [{text: "Back to MainMenu", callback_data: "Main"}]
+        ]
+      }
+    });
+    
+  })   
 })
 
 bot.action('Main', (ctx) => {
@@ -92,187 +186,11 @@ bot.action('Main', (ctx) => {
     parse_mode: "markdown",
     reply_markup: {
       inline_keyboard: [
-        [{ text: "Upload File", web_app: { url: "https://script.google.com/macros/s/AKfycbxJ0jPC304qgml1GbhhV1jYjKyvpEMmqVUfivLsJ2eIe1WSIlmuS4FkoucRarlhFxR1/exec" } }],
+        [{ text: "Upload File", web_app: { url: "https://script.google.com/macros/s/AKfycbw6fgnrC8pT2kpNtS9_VHHIAnS3XV8dObLW-vwieNUatW5FWaE6xYTW13qmz7s-dMcSNg/exec"} }],
         [{ text: "Download File", callback_data: "Download" }]
       ]
     }
   });
 })
 
-
-//Displays Name, Type & Size of the file sent by the user
-bot.on('document', (ctx) => {
-  let file = ctx.update.message.document;
-  let fileName = file.file_name;
-  let Type = file.mime_type;
-  let username = ctx.from.username;
-  let id = ctx.chat.id;
-
-
-  fileDescription = {
-    data: "Name: " + String(file.file_name) + "\n" +
-      "type: " + String(file.mime_type) + "\n" +
-      "Size: " + String(file.file_size) + "\n"
-  };
-
-  //fileData = fileDescription.data;
-  //console.log(fileData)
-  return ctx.reply("Document received." + "\n" + "Document information: " + "\n" + "\n" + fileData)
-
-}
-);
-
 bot.launch()
-//module.exports = bot
-
-//web: micro-bot -p $PORT => tried to change it to worker dyno =>
-//Please work on this!!!!
-
-//Windows git "warning: LF will be replaced by CRLF", is that warning tail backward?
-//=>Paste this in Terminal: "git config --global core.autocrlf false"
-
-/* 
-//createAndUploadFile(auth).catch(console.error)
-
-async function googleDriveFilesList () {
-    // Create a new JWT client using the key file downloaded from the Google Developer Console
-    return google.auth.getClient({
-      keyFile: 'credentials.json',
-      scopes: 'https://www.googleapis.com/auth/drive'
-    }).then(client => {
-        // Obtain a new drive client, making sure you pass along the auth client
-        const drive = google.drive({
-          version: 'v3',
-          auth: client
-        });
-      
-        //trial
-            const res = drive.drives.get({
-                // The ID of the shared drive.
-                driveId: '1agtikqPvyUrHgm9m_tMO63mv3uhRlrZE',
-                // Issue the request as a domain administrator; if set to true, then the requester will be granted access if they are an administrator of the domain to which the shared drive belongs.
-                useDomainAdminAccess: 'true',
-            });
-            console.log(res.data);
-        
-
-        // Make an authorized request to list Drive files.
-        var FolderId = "1agtikqPvyUrHgm9m_tMO63mv3uhRlrZE";
-        var listRequest = drive.files.list(PageSize = 5, fields='files(id, name)');
-
-        return listRequest;
-    }).then(res => {
-        var filesList = res.data.files;
-        console.log(filesList)
-        return filesList;
-    });
-  
-  }
-
-  //Another trial for drive list using ankibot2@gmail.com instead of my gmail
-  async function googleDriveFilesList () {
-    // Create a new JWT client using the key file downloaded from the Google Developer Console
-    return google.auth.getClient({
-      keyFile: 'credentials.json',
-      scopes: 'https://www.googleapis.com/auth/drive'
-    }).then(client => {
-        // Obtain a new drive client, making sure you pass along the auth client
-        const drive = google.drive({
-          version: 'v3',
-          auth: client
-        });
-      
-        //trial
-            const res = drive.drives.get({
-                // The ID of the shared drive.
-                driveId: '1Yx9_nMc-UWFHlvdzqlXt-2QdGzKidL5h',
-                // Issue the request as a domain administrator; if set to true, then the requester will be granted access if they are an administrator of the domain to which the shared drive belongs.
-                useDomainAdminAccess: 'true',
-            });
-            //console.log(res);
-            //console.log(res.data);
-
-        // Make an authorized request to list Drive files.
-        const FolderId = "1Yx9_nMc-UWFHlvdzqlXt-2QdGzKidL5h";
-        const listRequest = drive.files.list({
-            'pageSize': 5,
-            'fields': "files(id, name)",
-            'q': `parents in "${FolderId}"`
-          });
-        
-        //"'1Yx9_nMc-UWFHlvdzqlXt-2QdGzKidL5h'in parents"
-        console.log(listRequest);
-        
-        return listRequest;
-    }).then(res => {
-        //var filesList = res.data.files;
-        //console.log(filesList)
-        //return filesList;
-        console.log(res);
-    });
-  
-  }
-
-googleDriveFilesList(); //works well and perfectly
-
-  async function createAndUploadFile() {
-    // Create a new JWT client using the key file downloaded from the Google Developer Console
-    return google.auth.getClient({
-      keyFile: 'credentials.json',
-      scopes: 'https://www.googleapis.com/auth/drive'
-    }).then(client => {
-        // Obtain a new drive client, making sure you pass along the auth client
-        const drive = google.drive({
-          version: 'v3',
-          auth: client
-        });
-
-
-        //metadata for the new file on the google drive
-        //application/vnd.google-apps.spreadsheet
-        let fileMetaData = {
-            name: "Test txt 1",
-            parents: ['1agtikqPvyUrHgm9m_tMO63mv3uhRlrZE'],
-            description: "txt file",
-            mimeType: 'text/plain'
-        };
-
-        //media definition of the file
-        let media = {
-            mimeType: "text/plain",
-            body: fs.createReadStream("test.txt")
-        };
-
-        //create the request
-        let response = drive.files.create({params: {
-            resource: fileMetaData,
-            media: media,
-            fields: 'id'
-        }
-        })
-        
-
-        // Make an authorized request to create file.
-        return response;
-    
-    }).then(res => {
-        //console.log(res)
-        console.log(res.data, "File added.")
-        return res.data;
-    });
-    
-  }
-
-  //googleDriveFilesList(); //works well and perfectly
-  //createAndUploadFile(); //Try using fetch or XHTML
-
-    //Solved the "Could not load the default credentials. Browse 
-    //to https://cloud.google.com/docs/authentication/getting-started for more information." by installing
-    //google cloud sdk and adding it to Env PATH(system). 
-    //Then signed in with "gcloud auth login" to add the project id
-    // Now we need to solve => Unable to load endpoint drive("undefined"): ctr is not a constructor
-    // Solved by getting client &  using new function script
-
-    //Solved filesList => now when creating new file in the drive, it includes it in the list
-    //Create & upload file not solved!!
-*/
