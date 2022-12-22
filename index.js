@@ -197,9 +197,7 @@ bot.action('Main', (ctx) => {
 
 bot.launch({
   webhook: {
+    domain: "https://brick-red-rattlesnake-yoke.cyclic.app",
       port: 3000 // I've seen 3000 is frequently used so let's use that
   }
-}).then(
-  resolve => console.info(`Bot '${bot.botInfo.username}' (${bot.botInfo.id}) started successfully (${resolve || "OK"})`),
-  reject => console.info(`Bot '${bot.botInfo.username}' (${bot.botInfo.id}) failed to start: ${reject}`)
-);
+})
