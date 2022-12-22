@@ -24,6 +24,8 @@ const answer = `
 //const RestAPIurl = "https://script.google.com/macros/s/AKfycbwE0kSz-GE06Pgs-4CStv6B1l7JnKnel_NUNpgbwtcT-PyyTSHN/exec";
 const RestAPIurl = process.env.RestApiUrl;
 
+//https://brick-red-rattlesnake-yoke.cyclic.app
+
 //On the start command, it sends two buttons - Upload and Download
 bot.start((ctx) => {
   var id = ctx.chat.id;
@@ -193,4 +195,11 @@ bot.action('Main', (ctx) => {
   });
 })
 
-bot.launch()
+bot.launch({
+  webhook: {
+      port: 3000 // I've seen 3000 is frequently used so let's use that
+  }
+}).then(
+  resolve => console.info(`Bot '${bot.botInfo.username}' (${bot.botInfo.id}) started successfully (${resolve || "OK"})`),
+  reject => console.info(`Bot '${bot.botInfo.username}' (${bot.botInfo.id}) failed to start: ${reject}`)
+);
