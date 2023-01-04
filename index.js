@@ -5,6 +5,8 @@ const { drive } = require('googleapis/build/src/apis/drive');
 
 require("dotenv").config();
 const axios = require('axios');
+//const fetch = require('node-fetch');
+//import fetch from 'node-fetch';
 const Telegraf = require('telegraf');
 //const { Composer } = require('micro-bot');
 
@@ -35,7 +37,7 @@ bot.start((ctx) => {
     reply_markup: {
       inline_keyboard: [
         //[{text: "Upload File", callback_data: "Upload"}],
-        [{ text: "Upload File", web_app: { url: "https://script.google.com/macros/s/AKfycbw6fgnrC8pT2kpNtS9_VHHIAnS3XV8dObLW-vwieNUatW5FWaE6xYTW13qmz7s-dMcSNg/exec"} }],
+        [{ text: "Upload File", web_app: { url: "https://script.google.com/macros/s/AKfycbwQfRDqY3vYkFfbpn68ZzrzJ_dxnfQYHXBMtl3iPEHn_8VzND1UL1jjjOWv13sWDBMA9Q/exec"} }],
         [{ text: "Download File", callback_data: "Download" }]
       ]
     }
@@ -54,10 +56,11 @@ async function listFilesByYear(Year) {
 
   fileDescription = filesByYear.map((elem, index) => (
     `
-        Result ${index + 1}
-📁 File Name: ${elem.FileName}
-📁 Year: ${elem.Year}
-📥 Download Link: ${elem.FileUrl}
+        <i>Result ${index + 1}</i>
+📑 <b>Topic:</b> ${elem.Topic}
+📚 <b>Subject:</b> ${elem.Subject}
+📁 <b>File Name:</b> ${elem.FileName}
+📥 <b>Download Link:</b> ${elem.FileUrl}
 
                 `
   )
@@ -67,22 +70,77 @@ async function listFilesByYear(Year) {
   return fileDescription;
 }
 
+const downloadAnswer = `
+🔹🔹🔹🔹🔹🔹🔹🔹🔹🔹🔹🔹🔹🔹🔹🔹🔹
 
+🔎 <b>Search</b>
+      Search for Anki files by topic or subject
+
+📖 <b>Year</b>
+      To see available Anki Files under the selected year
+
+🔹🔹🔹🔹🔹🔹🔹🔹🔹🔹🔹🔹🔹🔹🔹🔹🔹
+`
 
 
 bot.action('Download', (ctx) => {
   var id = ctx.chat.id;
   ctx.deleteMessage();
 
-    ctx.telegram.sendMessage(id, "Choose Year", {
+    ctx.telegram.sendMessage(id, downloadAnswer, {
+      parse_mode: "HTML",
       reply_markup: {
         inline_keyboard: [
+          [{text: "Search", switch_inline_query_current_chat: ""}],
           [{text: "PC1", callback_data: "pc1"},{text: "PC2", callback_data:"pc2"}],
           [{text: "C1", callback_data: "c1"},{text: "C2", callback_data:"c2"}],
           [{text: "Back to MainMenu", callback_data: "Main"}]
         ]
       }
     });
+})
+
+bot.on('inline_query', async ctx => {
+    var query = ctx.inlineQuery.query;  
+    console.log(ctx.update);
+    
+    
+    await axios.get(RestAPIurl)
+        .then(d => d.data[0])
+        .then(d => {
+            var result = d.data;
+
+            var filtered = result.filter(item => item.Topic.toString().toLowerCase().includes(query)
+            || item.FileName.toString().toLowerCase().includes(query) == true);
+            
+            var results = filtered.map((elem, index) => (
+                {
+                type:'article', 
+                id: String(index),
+                title: elem.FileName, 
+                description: elem.Subject ,
+                parse_mode: "HTML",
+                message_text:   `
+                📌<u><b>${elem.Topic}</b> (${elem.Year})</u>
+                                
+📚 <b>Subject</b> - ${elem.Subject}
+📑 <b>Filename</b> - ${elem.FileName}
+📥 <b>Download url</b> - ${elem.FileUrl}
+
+                        ` 
+                })
+            );
+
+
+            if (results.length > 20){
+                results.length = 15
+            } 
+           
+            console.log(results);
+            ctx.answerInlineQuery(results, {cache_time: 300});
+            
+        })
+    console.log(query);
 })
 
 bot.action('pc1', (ctx) => {
@@ -98,6 +156,7 @@ bot.action('pc1', (ctx) => {
     }
     
     ctx.telegram.sendMessage(id, "Available PC1 Anki Files" + "\n" + result, {
+      parse_mode: "HTML",
       reply_markup: {
         inline_keyboard: [
           [{text: "Back to Year", callback_data: "Download" }],
@@ -122,6 +181,7 @@ bot.action('pc2', (ctx) => {
     }
     
     ctx.telegram.sendMessage(id, "Available PC2 Anki Files" + "\n" + result, {
+      parse_mode: "HTML",
       reply_markup: {
         inline_keyboard: [
           [{text: "Back to Year", callback_data: "Download" }],
@@ -146,6 +206,7 @@ bot.action('c1', (ctx) => {
     }
     
     ctx.telegram.sendMessage(id, "Available C1 Anki Files" + "\n" + result, {
+      parse_mode: "HTML",
       reply_markup: {
         inline_keyboard: [
           [{text: "Back to Year", callback_data: "Download" }],
@@ -170,6 +231,7 @@ bot.action('c2', (ctx) => {
     }
     
     ctx.telegram.sendMessage(id, "Available C2 Anki Files" + "\n" + result, {
+      parse_mode: "HTML",
       reply_markup: {
         inline_keyboard: [
           [{text: "Back to Year", callback_data: "Download" }],
@@ -188,16 +250,20 @@ bot.action('Main', (ctx) => {
     parse_mode: "markdown",
     reply_markup: {
       inline_keyboard: [
-        [{ text: "Upload File", web_app: { url: "https://script.google.com/macros/s/AKfycbw6fgnrC8pT2kpNtS9_VHHIAnS3XV8dObLW-vwieNUatW5FWaE6xYTW13qmz7s-dMcSNg/exec"} }],
+        [{ text: "Upload File", web_app: { url: "https://script.google.com/macros/s/AKfycbwQfRDqY3vYkFfbpn68ZzrzJ_dxnfQYHXBMtl3iPEHn_8VzND1UL1jjjOWv13sWDBMA9Q/exec"} }],
         [{ text: "Download File", callback_data: "Download" }]
       ]
     }
   });
 })
 
-bot.launch({
+bot.launch()
+
+/*
+{
   webhook: {
     domain: "https://brick-red-rattlesnake-yoke.cyclic.app",
       port: 3000 // I've seen 3000 is frequently used so let's use that
   }
-})
+}
+*/
