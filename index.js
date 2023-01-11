@@ -37,7 +37,7 @@ bot.start((ctx) => {
     reply_markup: {
       inline_keyboard: [
         //[{text: "Upload File", callback_data: "Upload"}],
-        [{ text: "Upload File", web_app: { url: "https://script.google.com/macros/s/AKfycbwQfRDqY3vYkFfbpn68ZzrzJ_dxnfQYHXBMtl3iPEHn_8VzND1UL1jjjOWv13sWDBMA9Q/exec"} }],
+        [{ text: "Upload File", web_app: { url: "https://script.google.com/macros/s/AKfycbzMiUVNJNaioLPBMf38LvB4lHjM8eMIoXVsRtkbbQxY47JJNEUf3IM4hwpKjEnzGT8L-w/exec"} }],
         [{ text: "Download File", callback_data: "Download" }]
       ]
     }
@@ -250,7 +250,7 @@ bot.action('Main', (ctx) => {
     parse_mode: "markdown",
     reply_markup: {
       inline_keyboard: [
-        [{ text: "Upload File", web_app: { url: "https://script.google.com/macros/s/AKfycbwQfRDqY3vYkFfbpn68ZzrzJ_dxnfQYHXBMtl3iPEHn_8VzND1UL1jjjOWv13sWDBMA9Q/exec"} }],
+        [{ text: "Upload File", web_app: { url: "https://script.google.com/macros/s/AKfycbzMiUVNJNaioLPBMf38LvB4lHjM8eMIoXVsRtkbbQxY47JJNEUf3IM4hwpKjEnzGT8L-w/exec"} }],
         [{ text: "Download File", callback_data: "Download" }]
       ]
     }
