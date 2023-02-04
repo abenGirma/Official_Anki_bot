@@ -37,7 +37,7 @@ bot.start((ctx) => {
     reply_markup: {
       inline_keyboard: [
         //[{text: "Upload File", callback_data: "Upload"}],
-        [{ text: "Upload File", web_app: { url: "https://script.google.com/macros/s/AKfycbzMiUVNJNaioLPBMf38LvB4lHjM8eMIoXVsRtkbbQxY47JJNEUf3IM4hwpKjEnzGT8L-w/exec"} }],
+        [{ text: "Upload File", web_app: { url: "https://script.google.com/macros/s/AKfycbz2FuedflEcZR7ivzxg1QoRgEQtVOg1U6JeH7nqVB7pvmH97q7xO1wrJWHlvIHuwG7NWw/exec"} }],
         [{ text: "Download File", callback_data: "Download" }]
       ]
     }
@@ -60,6 +60,7 @@ async function listFilesByYear(Year) {
 📑 <b>Topic:</b> ${elem.Topic}
 📚 <b>Subject:</b> ${elem.Subject}
 📁 <b>File Name:</b> ${elem.FileName}
+   <b>Uploaded By:</b> ${elem.Telegram_Username}
 📥 <b>Download Link:</b> ${elem.FileUrl}
 
                 `
@@ -92,8 +93,8 @@ bot.action('Download', (ctx) => {
       reply_markup: {
         inline_keyboard: [
           [{text: "Search", switch_inline_query_current_chat: ""}],
-          [{text: "PC1", callback_data: "pc1"},{text: "PC2", callback_data:"pc2"}],
-          [{text: "C1", callback_data: "c1"},{text: "C2", callback_data:"c2"}],
+          [{text: "Preclinical", callback_data: "Preclinical"}],
+          [{text: "Clinical", callback_data: "Clinical"}],
           [{text: "Back to MainMenu", callback_data: "Main"}]
         ]
       }
@@ -125,7 +126,8 @@ bot.on('inline_query', async ctx => {
                                 
 📚 <b>Subject</b> - ${elem.Subject}
 📑 <b>Filename</b> - ${elem.FileName}
-📥 <b>Download url</b> - ${elem.FileUrl}
+    <b>Uploaded By:</b> ${elem.Telegram_Username}
+📥 <b>Download Link</b> - ${elem.FileUrl}
 
                         ` 
                 })
@@ -143,10 +145,10 @@ bot.on('inline_query', async ctx => {
     console.log(query);
 })
 
-bot.action('pc1', (ctx) => {
+bot.action('Preclinical', (ctx) => {
   var id = ctx.chat.id;
   ctx.deleteMessage();
-  var Year = "PC1";
+  var Year = "Preclinical";
 
   listFilesByYear(Year)
   .then((result) =>{
@@ -168,35 +170,11 @@ bot.action('pc1', (ctx) => {
   })   
 })
 
-bot.action('pc2', (ctx) => {
+
+bot.action('Clinical', (ctx) => {
   var id = ctx.chat.id;
   ctx.deleteMessage();
-  var Year = "PC2";
-
-  listFilesByYear(Year)
-  .then((result) =>{
-    var NumOfResults = result.length;
-    if(result.length > 20){
-      result.length = 9;
-    }
-    
-    ctx.telegram.sendMessage(id, "Available PC2 Anki Files" + "\n" + result, {
-      parse_mode: "HTML",
-      reply_markup: {
-        inline_keyboard: [
-          [{text: "Back to Year", callback_data: "Download" }],
-          [{text: "Back to MainMenu", callback_data: "Main"}]
-        ]
-      }
-    });
-    
-  })   
-})
-
-bot.action('c1', (ctx) => {
-  var id = ctx.chat.id;
-  ctx.deleteMessage();
-  var Year = "C1";
+  var Year = "Clinical";
 
   listFilesByYear(Year)
   .then((result) =>{
@@ -218,30 +196,6 @@ bot.action('c1', (ctx) => {
   })   
 })
 
-bot.action('c2', (ctx) => {
-  var id = ctx.chat.id;
-  ctx.deleteMessage();
-  var Year = "C2";
-
-  listFilesByYear(Year)
-  .then((result) =>{
-    var NumOfResults = result.length;
-    if(result.length > 20){
-      result.length = 9;
-    }
-    
-    ctx.telegram.sendMessage(id, "Available C2 Anki Files" + "\n" + result, {
-      parse_mode: "HTML",
-      reply_markup: {
-        inline_keyboard: [
-          [{text: "Back to Year", callback_data: "Download" }],
-          [{text: "Back to MainMenu", callback_data: "Main"}]
-        ]
-      }
-    });
-    
-  })   
-})
 
 bot.action('Main', (ctx) => {
   var id = ctx.chat.id;
@@ -250,7 +204,7 @@ bot.action('Main', (ctx) => {
     parse_mode: "markdown",
     reply_markup: {
       inline_keyboard: [
-        [{ text: "Upload File", web_app: { url: "https://script.google.com/macros/s/AKfycbzMiUVNJNaioLPBMf38LvB4lHjM8eMIoXVsRtkbbQxY47JJNEUf3IM4hwpKjEnzGT8L-w/exec"} }],
+        [{ text: "Upload File", web_app: { url: "https://script.google.com/macros/s/AKfycbz2FuedflEcZR7ivzxg1QoRgEQtVOg1U6JeH7nqVB7pvmH97q7xO1wrJWHlvIHuwG7NWw/exec"} }],
         [{ text: "Download File", callback_data: "Download" }]
       ]
     }
