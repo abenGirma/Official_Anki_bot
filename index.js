@@ -60,7 +60,7 @@ async function listFilesByYear(Year) {
 📑 <b>Topic:</b> ${elem.Topic}
 📚 <b>Subject:</b> ${elem.Subject}
 📁 <b>File Name:</b> ${elem.FileName}
-🧑 <b>Uploaded By:</b> ${elem.Telegram_Username}
+🧑 <b>Uploaded By:</b> ${elem.Telegram_Username} or ${elem.Email}
 📥 <b>Download Link:</b> ${elem.FileUrl}
 
                 `
@@ -125,7 +125,7 @@ bot.on('inline_query', async ctx => {
                                 
 📚 <b>Subject</b> - ${elem.Subject}
 📑 <b>Filename</b> - ${elem.FileName}
-🧑 <b>Uploaded By:</b> ${elem.Telegram_Username}
+🧑 <b>Uploaded By:</b> ${elem.Telegram_Username} or ${elem.Email}
 📥 <b>Download Link</b> - ${elem.FileUrl}
 
                         ` 
