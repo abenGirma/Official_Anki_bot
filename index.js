@@ -20,7 +20,7 @@ const answer = `
 📥 *Download* Anki Decks that were sent by our own students *Or* 
 ⬆️ Send us your Anki Decks to make your contribution.
 
-This bot is made by the SCOME National team. The cards didn't go under any reviewing system yet so if you get any uncertain information please text or email the owner of the deck (telegram username is found along with the deck) for correction.
+This bot is made by the SCOME National team. The cards didn't go under any reviewing system yet so if you get any uncertain information please text or email the owner of the deck (address is found along with the deck) for correction.
 
 /start - To start the bot
 🔹🔹🔹🔹🔹🔹🔹🔹🔹🔹🔹🔹🔹🔹🔹🔹🔹
@@ -62,7 +62,7 @@ async function listFilesByYear(Year) {
 📑 <b>Topic:</b> ${elem.Topic}
 📚 <b>Subject:</b> ${elem.Subject}
 📁 <b>File Name:</b> ${elem.FileName}
-   <b>Uploaded By:</b> ${elem.Telegram_Username}
+🧑 <b>Uploaded By:</b> ${elem.Telegram_Username}
 📥 <b>Download Link:</b> ${elem.FileUrl}
 
                 `
@@ -119,7 +119,7 @@ bot.on('inline_query', async ctx => {
                 {
                 type:'article', 
                 id: String(index),
-                title: elem.FileName, 
+                title: elem.Topic, 
                 description: elem.Subject ,
                 parse_mode: "HTML",
                 message_text:   `
@@ -127,7 +127,7 @@ bot.on('inline_query', async ctx => {
                                 
 📚 <b>Subject</b> - ${elem.Subject}
 📑 <b>Filename</b> - ${elem.FileName}
-    <b>Uploaded By:</b> ${elem.Telegram_Username}
+🧑 <b>Uploaded By:</b> ${elem.Telegram_Username}
 📥 <b>Download Link</b> - ${elem.FileUrl}
 
                         ` 
@@ -158,7 +158,7 @@ bot.action('Preclinical', (ctx) => {
       result.length = 9;
     }
     
-    ctx.telegram.sendMessage(id, "Available PC1 Anki Files" + "\n" + result, {
+    ctx.telegram.sendMessage(id, "Available Preclinical Anki Files" + "\n" + result, {
       parse_mode: "HTML",
       reply_markup: {
         inline_keyboard: [
@@ -184,7 +184,7 @@ bot.action('Clinical', (ctx) => {
       result.length = 9;
     }
     
-    ctx.telegram.sendMessage(id, "Available C1 Anki Files" + "\n" + result, {
+    ctx.telegram.sendMessage(id, "Available Clinical Anki Files" + "\n" + result, {
       parse_mode: "HTML",
       reply_markup: {
         inline_keyboard: [
