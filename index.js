@@ -5,8 +5,7 @@ const { drive } = require('googleapis/build/src/apis/drive');
 
 require("dotenv").config();
 const axios = require('axios');
-//const fetch = require('node-fetch');
-//import fetch from 'node-fetch';
+
 const Telegraf = require('telegraf');
 //const { Composer } = require('micro-bot');
 
@@ -28,7 +27,6 @@ This bot is made by the SCOME National team. The cards didn't go under any revie
 //const RestAPIurl = "https://script.google.com/macros/s/AKfycbwE0kSz-GE06Pgs-4CStv6B1l7JnKnel_NUNpgbwtcT-PyyTSHN/exec";
 const RestAPIurl = process.env.RestApiUrl;
 
-//https://brick-red-rattlesnake-yoke.cyclic.app
 
 //On the start command, it sends two buttons - Upload and Download
 bot.start((ctx) => {
@@ -39,7 +37,7 @@ bot.start((ctx) => {
     reply_markup: {
       inline_keyboard: [
         //[{text: "Upload File", callback_data: "Upload"}],
-        [{ text: "Upload File", web_app: { url: "https://script.google.com/macros/s/AKfycbz2FuedflEcZR7ivzxg1QoRgEQtVOg1U6JeH7nqVB7pvmH97q7xO1wrJWHlvIHuwG7NWw/exec"} }],
+        [{ text: "Upload File", web_app: { url: "https://script.google.com/macros/s/AKfycbyXLPN_7_6FhzrysLYwQQjlFj9wPl9jTZLG4HRgduZxN5mJRi3lURK-neTu6e2IdttdEw/exec"} }],
         [{ text: "Download File", callback_data: "Download" }]
       ]
     }
@@ -205,7 +203,7 @@ bot.action('Main', (ctx) => {
     parse_mode: "markdown",
     reply_markup: {
       inline_keyboard: [
-        [{ text: "Upload File", web_app: { url: "https://script.google.com/macros/s/AKfycbz2FuedflEcZR7ivzxg1QoRgEQtVOg1U6JeH7nqVB7pvmH97q7xO1wrJWHlvIHuwG7NWw/exec"} }],
+        [{ text: "Upload File", web_app: { url: "https://script.google.com/macros/s/AKfycbyXLPN_7_6FhzrysLYwQQjlFj9wPl9jTZLG4HRgduZxN5mJRi3lURK-neTu6e2IdttdEw/exec"} }],
         [{ text: "Download File", callback_data: "Download" }]
       ]
     }
