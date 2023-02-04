@@ -20,6 +20,8 @@ const answer = `
 📥 *Download* Anki Decks that were sent by our own students *Or* 
 ⬆️ Send us your Anki Decks to make your contribution.
 
+This bot is made by the SCOME National team. The cards didn't go under any reviewing system yet so if you get any uncertain information please text or email the owner of the deck (telegram username is found along with the deck) for correction.
+
 /start - To start the bot
 🔹🔹🔹🔹🔹🔹🔹🔹🔹🔹🔹🔹🔹🔹🔹🔹🔹
 `;
@@ -93,8 +95,7 @@ bot.action('Download', (ctx) => {
       reply_markup: {
         inline_keyboard: [
           [{text: "Search", switch_inline_query_current_chat: ""}],
-          [{text: "Preclinical", callback_data: "Preclinical"}],
-          [{text: "Clinical", callback_data: "Clinical"}],
+          [{text: "Preclinical", callback_data: "Preclinical"},{text: "Clinical", callback_data: "Clinical"}],
           [{text: "Back to MainMenu", callback_data: "Main"}]
         ]
       }
