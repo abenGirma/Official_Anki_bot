@@ -71,6 +71,38 @@ async function listFilesByYear(Year) {
   return fileDescription;
 }
 
+
+async function resultsByPage(Year) {
+  let res = await axios.get(RestAPIurl)
+  result = res.data[0].data;
+ 
+  const filesByYear = result.filter((elem) => {return elem.Year.toString() == Year});
+  const firstPage = filesByYear.slice(0, 10);
+  const secondPage = filesByYear.slice(10,20);
+  const thirdPage = filesByYear.slice(20,30);
+
+  console.log(secondPage);
+  
+      const fileDescription = secondPage.map((elem, index) => (
+          `
+              <i>Result ${index + 1}</i>
+      📑 <b>Topic:</b> ${elem.Topic}
+      📚 <b>Subject:</b> ${elem.Subject}
+      📁 <b>File Name:</b> ${elem.FileName}
+      🧑 <b>Uploaded By:</b> ${elem.Telegram_Username} (${elem.Email})
+      📥 <b>Download Link:</b> ${elem.FileUrl}
+      
+                      `
+        )
+        );
+        
+      console.log(fileDescription);
+      return fileDescription;
+
+}
+
+//resultsByPage("Preclinical");
+
 const downloadAnswer = `
 🔹🔹🔹🔹🔹🔹🔹🔹🔹🔹🔹🔹🔹🔹🔹🔹🔹
 
@@ -148,15 +180,37 @@ bot.action('Preclinical', (ctx) => {
   var id = ctx.chat.id;
   ctx.deleteMessage();
   var Year = "Preclinical";
+  var Page = "1";
 
   listFilesByYear(Year)
   .then((result) =>{
     var NumOfResults = result.length;
-    if(result.length > 20){
-      result.length = 9;
-    }
+    const firstPage = result.slice(0, 10);
     
-    ctx.telegram.sendMessage(id, "Available Preclinical Anki Files" + "\n" + result, {
+    ctx.telegram.sendMessage(id, "Available Clinical Anki Files - Page 1" + "\n" + result, {
+      parse_mode: "HTML",
+      reply_markup: {
+        inline_keyboard: [
+          [{text: "Next Page >", callback_data:"Next2"}],
+          [{text: "Back to Year", callback_data: "Download" }],
+          [{text: "Back to MainMenu", callback_data: "Main"}]
+        ]
+      }
+    });
+    
+  })
+ 
+})
+
+
+bot.action('Next2', (ctx) => {
+  var id = ctx.chat.id;
+  ctx.deleteMessage();
+  var Year = "Preclinical";
+  var Page = "2";
+
+  resultsByPage(Year).then((result) =>{
+    ctx.telegram.sendMessage(id, "Page 2 of Preclinical Anki Files" + "\n" + result, {
       parse_mode: "HTML",
       reply_markup: {
         inline_keyboard: [
@@ -164,14 +218,16 @@ bot.action('Preclinical', (ctx) => {
           [{text: "Back to MainMenu", callback_data: "Main"}]
         ]
       }
-    });
+    })
+  })
 
-  })   
 })
 
 
 bot.action('Clinical', (ctx) => {
   var id = ctx.chat.id;
+  var messageId = ctx.update.callback_query.message.message_id;
+  //console.log(messageId);
   ctx.deleteMessage();
   var Year = "Clinical";
 
@@ -219,4 +275,31 @@ bot.launch()
       port: 3000 // I've seen 3000 is frequently used so let's use that
   }
 }
+
+bot.command('NxtPage', (ctx) => {
+  var id = ctx.chat.id;
+  var messageId = ctx.update.message.message_id;
+  var Year = "Preclinical";
+
+  console.log(ctx.update)
+  //ctx.telegram.editMessageText(id,messageId, "Hello")
+
+})
+  listFilesByYear(Year)
+  .then((result) =>{
+    var NumOfResults = result.length;
+    var Page2Results = [];
+    Page2Results.push(result[13])
+   
+    ctx.editMessageText(id, messageId, "Page 2 of Preclinical Anki Files" + "\n" + result, {
+      parse_mode: "HTML",
+      reply_markup: {
+        inline_keyboard: [
+          [{text: "Back to Year", callback_data: "Download" }],
+          [{text: "Back to MainMenu", callback_data: "Main"}]
+        ]
+      }
+    })
+
+  })
 */
