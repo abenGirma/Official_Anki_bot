@@ -71,7 +71,7 @@ async function listFilesByYear(Year) {
   )
   );
 
-  console.log(fileDescription);
+  //console.log(fileDescription);
   return fileDescription;
 }
 
@@ -213,12 +213,12 @@ bot.action('Next2P', (ctx) => {
   ctx.deleteMessage();
   var Year = "Preclinical";
 
-
   listFilesByYear(Year)
   .then((result) =>{
     var NumOfResults = result.length;
-    result.slice(9,18);
-    
+    var secondPage = result.slice(9,18);
+    console.log(secondPage);
+
     if(result.length > 20){
       result.length = 9;
     }
