@@ -196,7 +196,8 @@ bot.action('Preclinical', (ctx) => {
       parse_mode: "HTML",
       reply_markup: {
         inline_keyboard: [
-          [{text: "Page 2", callback_data: "Next2P"}],
+          [{text: "🟩1🟩", callback_data: "Preclinical"}, {text: "Page 2", callback_data: "Next2P"},{text: "Page 3", callback_data: "Next3P"}, {text: "Page 4", callback_data: "Next4P"}],
+          [{text: "Page 5", callback_data: "Next5P"},{text: "Page 6", callback_data: "Next6P"}, {text: "Page 7", callback_data: "Next7P"}, {text: "Page 8", callback_data: "Next8P"}],
           [{text: "Back to Year", callback_data: "Download" }],
           [{text: "Back to MainMenu", callback_data: "Main"}]
         ]
@@ -227,7 +228,42 @@ bot.action('Next2P', (ctx) => {
       parse_mode: "HTML",
       reply_markup: {
         inline_keyboard: [
-          [{text: "Back to Page 1", callback_data: "Preclinical"}, {text: "Page 3", callback_data: "Next3P"}],
+          [{text: "Page 1", callback_data: "Preclinical"}, {text: "🟩2🟩", callback_data: "Next2P"},{text: "Page 3", callback_data: "Next3P"}, {text: "Page 4", callback_data: "Next4P"}],
+          [{text: "Page 5", callback_data: "Next5P"},{text: "Page 6", callback_data: "Next6P"}, {text: "Page 7", callback_data: "Next7P"}, {text: "Page 8", callback_data: "Next8P"}],
+          [{text: "Back to Year", callback_data: "Download" }],
+          [{text: "Back to MainMenu", callback_data: "Main"}]
+        ]
+      }
+    });
+    
+  })   
+
+})
+
+
+bot.action('Next3P', (ctx) => {
+  var id = ctx.chat.id;
+  ctx.deleteMessage();
+  var Year = "Preclinical";
+
+  listFilesByYear(Year)
+  .then((result) =>{
+    var thirdPage = result.slice(18,27);
+    var NumOfResults = thirdPage.length;
+
+    console.log(NumOfResults);
+    console.log(thirdPage);
+
+    if(result.length > 20){
+      result.length = 9;
+    }
+    
+    ctx.telegram.sendMessage(id, "Page 3 - Pre-Clinical Anki Files" + "\n" + thirdPage, {
+      parse_mode: "HTML",
+      reply_markup: {
+        inline_keyboard: [
+          [{text: "Page 1", callback_data: "Preclinical"}, {text: "Page 2", callback_data: "Next2P"},{text: "🟩3🟩", callback_data: "Next3P"}, {text: "Page 4", callback_data: "Next4P"}],
+          [{text: "Page 5", callback_data: "Next5P"},{text: "Page 6", callback_data: "Next6P"}, {text: "Page 7", callback_data: "Next7P"}, {text: "Page 8", callback_data: "Next8P"}],
           [{text: "Back to Year", callback_data: "Download" }],
           [{text: "Back to MainMenu", callback_data: "Main"}]
         ]
