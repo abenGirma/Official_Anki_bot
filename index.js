@@ -298,7 +298,7 @@ bot.action('Next8P', (ctx) => {
     var NumOfResults = eighthPage.length;
 
     console.log(NumOfResults);
-    console.log(thirdPage);
+    console.log(eighthPage);
 
     if(result.length > 20){
       result.length = 9;
@@ -316,7 +316,7 @@ bot.action('Next8P', (ctx) => {
           ]
         }
       });
-    }else {
+    }else if (NumOfResults = 0){
       ctx.telegram.sendMessage(id, "Page 8 - Pre-Clinical Anki Files" + "\n" + "No Results", {
         parse_mode: "HTML",
         reply_markup: {
@@ -329,6 +329,7 @@ bot.action('Next8P', (ctx) => {
         }
       });
     }
+    
   })   
 
 })
