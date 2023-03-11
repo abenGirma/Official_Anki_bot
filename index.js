@@ -304,7 +304,7 @@ bot.action('Next8P', (ctx) => {
       result.length = 9;
     }
     
-    if (NumOfResults > 0){
+    if (NumOfResults != 0){
       ctx.telegram.sendMessage(id, "Page 8 - Pre-Clinical Anki Files" + "\n" + eighthPage, {
         parse_mode: "HTML",
         reply_markup: {
@@ -316,7 +316,7 @@ bot.action('Next8P', (ctx) => {
           ]
         }
       });
-    }else if (NumOfResults = 0){
+    }else {
       ctx.telegram.sendMessage(id, "Page 8 - Pre-Clinical Anki Files" + "\n" + "No Results", {
         parse_mode: "HTML",
         reply_markup: {
@@ -329,7 +329,7 @@ bot.action('Next8P', (ctx) => {
         }
       });
     }
-    
+
   })   
 
 })
