@@ -27,10 +27,15 @@ This bot is made by the SCOME National team. The cards didn't go under any revie
 //const RestAPIurl = "https://script.google.com/macros/s/AKfycbwE0kSz-GE06Pgs-4CStv6B1l7JnKnel_NUNpgbwtcT-PyyTSHN/exec";
 const RestAPIurl = process.env.RestApiUrl;
 
+bot.catch((err, ctx) => {
+  console.log(`Ooops, encountered an error for ${ctx.updateType}`, err)
+})
+
 
 //On the start command, it sends two buttons - Upload and Download
 bot.start((ctx) => {
   var id = ctx.chat.id;
+  throw new Error('Example error')
 
   ctx.telegram.sendMessage(id, answer, {
     parse_mode: "markdown",
@@ -42,6 +47,7 @@ bot.start((ctx) => {
       ]
     }
   });
+
 
 })
 
@@ -97,7 +103,7 @@ async function resultsByPage(Year) {
         );
         
       console.log(fileDescription);
-      return fileDescription;
+      return filesByYear;
 
 }
 
@@ -180,29 +186,29 @@ bot.action('Preclinical', (ctx) => {
   var id = ctx.chat.id;
   ctx.deleteMessage();
   var Year = "Preclinical";
-  var Page = "1";
-
+  
   listFilesByYear(Year)
   .then((result) =>{
     var NumOfResults = result.length;
-    const firstPage = result.slice(0, 10);
+    if(result.length > 20){
+      result.length = 9;
+    }
     
-    ctx.telegram.sendMessage(id, "Available Clinical Anki Files - Page 1" + "\n" + result, {
+    ctx.telegram.sendMessage(id, "Available Pre-Clinical Anki Files" + "\n" + result, {
       parse_mode: "HTML",
       reply_markup: {
         inline_keyboard: [
-          [{text: "Next Page >", callback_data:"Next2"}],
           [{text: "Back to Year", callback_data: "Download" }],
           [{text: "Back to MainMenu", callback_data: "Main"}]
         ]
       }
     });
     
-  })
+  })   
  
 })
 
-
+/*
 bot.action('Next2', (ctx) => {
   var id = ctx.chat.id;
   ctx.deleteMessage();
@@ -222,7 +228,7 @@ bot.action('Next2', (ctx) => {
   })
 
 })
-
+*/
 
 bot.action('Clinical', (ctx) => {
   var id = ctx.chat.id;
@@ -266,7 +272,7 @@ bot.action('Main', (ctx) => {
   });
 })
 
-bot.launch()
+bot.launch();
 
 /*
 {
