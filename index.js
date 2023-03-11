@@ -223,7 +223,7 @@ bot.action('Next2P', (ctx) => {
       result.length = 9;
     }
     
-    ctx.telegram.sendMessage(id, "Page 2 - Pre-Clinical Anki Files" + "\n" + result, {
+    ctx.telegram.sendMessage(id, "Page 2 - Pre-Clinical Anki Files" + "\n" + secondPage, {
       parse_mode: "HTML",
       reply_markup: {
         inline_keyboard: [
