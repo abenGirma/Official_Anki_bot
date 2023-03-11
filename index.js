@@ -35,7 +35,7 @@ bot.catch((err, ctx) => {
 //On the start command, it sends two buttons - Upload and Download
 bot.start((ctx) => {
   var id = ctx.chat.id;
-  
+
   ctx.telegram.sendMessage(id, answer, {
     parse_mode: "markdown",
     reply_markup: {
@@ -196,6 +196,7 @@ bot.action('Preclinical', (ctx) => {
       parse_mode: "HTML",
       reply_markup: {
         inline_keyboard: [
+          [{text: "Page 2", callback_data: "Next2P"}],
           [{text: "Back to Year", callback_data: "Download" }],
           [{text: "Back to MainMenu", callback_data: "Main"}]
         ]
@@ -206,27 +207,37 @@ bot.action('Preclinical', (ctx) => {
  
 })
 
-/*
-bot.action('Next2', (ctx) => {
+
+bot.action('Next2P', (ctx) => {
   var id = ctx.chat.id;
   ctx.deleteMessage();
   var Year = "Preclinical";
-  var Page = "2";
 
-  resultsByPage(Year).then((result) =>{
-    ctx.telegram.sendMessage(id, "Page 2 of Preclinical Anki Files" + "\n" + result, {
+
+  listFilesByYear(Year)
+  .then((result) =>{
+    var NumOfResults = result.length;
+    result.slice(9,18);
+    
+    if(result.length > 20){
+      result.length = 9;
+    }
+    
+    ctx.telegram.sendMessage(id, "Page 2 - Pre-Clinical Anki Files" + "\n" + result, {
       parse_mode: "HTML",
       reply_markup: {
         inline_keyboard: [
+          [{text: "Back to Page 1", callback_data: "Preclinical"}, {text: "Page 3", callback_data: "Next3P"}],
           [{text: "Back to Year", callback_data: "Download" }],
           [{text: "Back to MainMenu", callback_data: "Main"}]
         ]
       }
-    })
-  })
+    });
+    
+  })   
 
 })
-*/
+
 
 bot.action('Clinical', (ctx) => {
   var id = ctx.chat.id;
@@ -238,6 +249,7 @@ bot.action('Clinical', (ctx) => {
   listFilesByYear(Year)
   .then((result) =>{
     var NumOfResults = result.length;
+ 
     if(result.length > 20){
       result.length = 9;
     }
