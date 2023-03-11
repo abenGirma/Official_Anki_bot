@@ -189,7 +189,7 @@ bot.action('Preclinical', (ctx) => {
   .then((result) =>{
     var NumOfResults = result.length;
     if(result.length > 20){
-      result.length = 9;
+      result.length = 5;
     }
     
     ctx.telegram.sendMessage(id, "Available Pre-Clinical Anki Files" + "\n" + result, {
@@ -216,7 +216,7 @@ bot.action('Next2P', (ctx) => {
 
   listFilesByYear(Year)
   .then((result) =>{
-    var secondPage = result.slice(9,18);
+    var secondPage = result.slice(5,10);
     var NumOfResults = secondPage.length;
     console.log(secondPage);
 
@@ -262,7 +262,7 @@ bot.action('Next3P', (ctx) => {
 
   listFilesByYear(Year)
   .then((result) =>{
-    var thirdPage = result.slice(18,27);
+    var thirdPage = result.slice(10,15);
     var NumOfResults = thirdPage.length;
 
     console.log(NumOfResults);
@@ -308,7 +308,7 @@ bot.action('Next4P', (ctx) => {
 
   listFilesByYear(Year)
   .then((result) =>{
-    var fourthPage = result.slice(27,36);
+    var fourthPage = result.slice(15,20);
     var NumOfResults = fourthPage.length;
 
     console.log(NumOfResults);
@@ -354,7 +354,7 @@ bot.action('Next5P', (ctx) => {
 
   listFilesByYear(Year)
   .then((result) =>{
-    var fifthPage = result.slice(36,45);
+    var fifthPage = result.slice(20,25);
     var NumOfResults = fifthPage.length;
 
     console.log(NumOfResults);
@@ -400,7 +400,7 @@ bot.action('Next6P', (ctx) => {
 
   listFilesByYear(Year)
   .then((result) =>{
-    var sixthPage = result.slice(45,54);
+    var sixthPage = result.slice(25,30);
     var NumOfResults = sixthPage.length;
 
     console.log(NumOfResults);
@@ -446,7 +446,7 @@ bot.action('Next7P', (ctx) => {
 
   listFilesByYear(Year)
   .then((result) =>{
-    var seventhPage = result.slice(54,63);
+    var seventhPage = result.slice(30,35);
     var NumOfResults = seventhPage.length;
 
     console.log(NumOfResults);
@@ -492,7 +492,7 @@ bot.action('Next8P', (ctx) => {
 
   listFilesByYear(Year)
   .then((result) =>{
-    var eighthPage = result.slice(63,72);
+    var eighthPage = result.slice(35,40);
     var NumOfResults = eighthPage.length;
 
     console.log(NumOfResults);
@@ -503,7 +503,7 @@ bot.action('Next8P', (ctx) => {
     }
     
     if (NumOfResults != 0){
-      ctx.telegram.sendMessage(id, "Page 8 - Pre-Clinical Anki Files" + "\n" + eighthPage, {
+      ctx.telegram.sendMessage(id, "Page 8 - Pre-Clinical Anki Files" + "\n" + eighthPage + "\n" + "\n" + "For more results, use the <b>Search</b> button", {
         parse_mode: "HTML",
         reply_markup: {
           inline_keyboard: [
@@ -515,7 +515,7 @@ bot.action('Next8P', (ctx) => {
         }
       });
     }else {
-      ctx.telegram.sendMessage(id, "Page 8 - Pre-Clinical Anki Files" + "\n" + "No Results", {
+      ctx.telegram.sendMessage(id, "Page 8 - Pre-Clinical Anki Files" + "\n" + "No Results" + "\n" + "For more results, use the <b>Search</b> button", {
         parse_mode: "HTML",
         reply_markup: {
           inline_keyboard: [
@@ -545,13 +545,15 @@ bot.action('Clinical', (ctx) => {
     var NumOfResults = result.length;
  
     if(result.length > 20){
-      result.length = 9;
+      result.length = 5;
     }
     
     ctx.telegram.sendMessage(id, "Available Clinical Anki Files" + "\n" + result, {
       parse_mode: "HTML",
       reply_markup: {
         inline_keyboard: [
+          [{text: "🟩1🟩", callback_data: "Clinical"}, {text: "Page 2", callback_data: "Next2C"},{text: "Page 3", callback_data: "Next3C"}, {text: "Page 4", callback_data: "Next4C"}],
+          [{text: "Page 5", callback_data: "Next5C"},{text: "Page 6", callback_data: "Next6C"}, {text: "Page 7", callback_data: "Next7C"}, {text: "Page 8", callback_data: "Next8C"}],
           [{text: "Back to Year", callback_data: "Download" }],
           [{text: "Back to MainMenu", callback_data: "Main"}]
         ]
@@ -559,6 +561,330 @@ bot.action('Clinical', (ctx) => {
     });
     
   })   
+})
+
+
+bot.action('Next2C', (ctx) => {
+  var id = ctx.chat.id;
+  ctx.deleteMessage();
+  var Year = "Clinical";
+
+  listFilesByYear(Year)
+  .then((result) =>{
+    var secondPage = result.slice(5,10);
+    var NumOfResults = secondPage.length;
+    console.log(secondPage);
+
+    if(result.length > 20){
+      result.length = 9;
+    }
+    
+    if (NumOfResults != 0){
+      ctx.telegram.sendMessage(id, "Page 2 - Clinical Anki Files" + "\n" + secondPage, {
+        parse_mode: "HTML",
+        reply_markup: {
+          inline_keyboard: [
+            [{text: "Page 1", callback_data: "Preclinical"}, {text: "🟩2🟩", callback_data: "Next2P"},{text: "Page 3", callback_data: "Next3P"}, {text: "Page 4", callback_data: "Next4P"}],
+            [{text: "Page 5", callback_data: "Next5P"},{text: "Page 6", callback_data: "Next6P"}, {text: "Page 7", callback_data: "Next7P"}, {text: "Page 8", callback_data: "Next8P"}],
+            [{text: "Back to Year", callback_data: "Download" }],
+            [{text: "Back to MainMenu", callback_data: "Main"}]
+          ]
+        }
+      });
+    }else {
+      ctx.telegram.sendMessage(id, "Page 2 - Clinical Anki Files" + "\n" + "No Results", {
+        parse_mode: "HTML",
+        reply_markup: {
+          inline_keyboard: [
+            [{text: "Page 1", callback_data: "Preclinical"}, {text: "🟩2🟩", callback_data: "Next2P"},{text: "Page 3", callback_data: "Next3P"}, {text: "Page 4", callback_data: "Next4P"}],
+            [{text: "Page 5", callback_data: "Next5P"},{text: "Page 6", callback_data: "Next6P"}, {text: "Page 7", callback_data: "Next7P"}, {text: "Page 8", callback_data: "Next8P"}],
+            [{text: "Back to Year", callback_data: "Download" }],
+            [{text: "Back to MainMenu", callback_data: "Main"}]
+          ]
+        }
+      });
+    }
+    
+  })   
+
+})
+
+
+bot.action('Next3C', (ctx) => {
+  var id = ctx.chat.id;
+  ctx.deleteMessage();
+  var Year = "Clinical";
+
+  listFilesByYear(Year)
+  .then((result) =>{
+    var thirdPage = result.slice(10,15);
+    var NumOfResults = thirdPage.length;
+
+    console.log(NumOfResults);
+    console.log(thirdPage);
+
+    if(result.length > 20){
+      result.length = 9;
+    }
+    
+    if (NumOfResults != 0){
+      ctx.telegram.sendMessage(id, "Page 3 - Clinical Anki Files" + "\n" + thirdPage, {
+        parse_mode: "HTML",
+        reply_markup: {
+          inline_keyboard: [
+            [{text: "Page 1", callback_data: "Preclinical"}, {text: "Page 2", callback_data: "Next2P"},{text: "🟩3🟩", callback_data: "Next3P"}, {text: "Page 4", callback_data: "Next4P"}],
+            [{text: "Page 5", callback_data: "Next5P"},{text: "Page 6", callback_data: "Next6P"}, {text: "Page 7", callback_data: "Next7P"}, {text: "Page 8", callback_data: "Next8P"}],
+            [{text: "Back to Year", callback_data: "Download" }],
+            [{text: "Back to MainMenu", callback_data: "Main"}]
+          ]
+        }
+      });
+    }else {
+      ctx.telegram.sendMessage(id, "Page 3 - Clinical Anki Files" + "\n" + "No Results", {
+        parse_mode: "HTML",
+        reply_markup: {
+          inline_keyboard: [
+            [{text: "Page 1", callback_data: "Preclinical"}, {text: "Page 2", callback_data: "Next2P"},{text: "🟩3🟩", callback_data: "Next3P"}, {text: "Page 4", callback_data: "Next4P"}],
+            [{text: "Page 5", callback_data: "Next5P"},{text: "Page 6", callback_data: "Next6P"}, {text: "Page 7", callback_data: "Next7P"}, {text: "Page 8", callback_data: "Next8P"}],
+            [{text: "Back to Year", callback_data: "Download" }],
+            [{text: "Back to MainMenu", callback_data: "Main"}]
+          ]
+        }
+      });
+    }
+  })   
+
+})
+
+bot.action('Next4C', (ctx) => {
+  var id = ctx.chat.id;
+  ctx.deleteMessage();
+  var Year = "Clinical";
+
+  listFilesByYear(Year)
+  .then((result) =>{
+    var fourthPage = result.slice(15,20);
+    var NumOfResults = fourthPage.length;
+
+    console.log(NumOfResults);
+    console.log(fourthPage);
+
+    if(result.length > 20){
+      result.length = 9;
+    }
+    
+    if (NumOfResults != 0){
+      ctx.telegram.sendMessage(id, "Page 4 - Clinical Anki Files" + "\n" + fourthPage, {
+        parse_mode: "HTML",
+        reply_markup: {
+          inline_keyboard: [
+            [{text: "Page 1", callback_data: "Preclinical"}, {text: "Page 2", callback_data: "Next2P"},{text: "Page 3", callback_data: "Next3P"}, {text: "🟩4🟩", callback_data: "Next4P"}],
+            [{text: "Page 5", callback_data: "Next5P"},{text: "Page 6", callback_data: "Next6P"}, {text: "Page 7", callback_data: "Next7P"}, {text: "Page 8", callback_data: "Next8P"}],
+            [{text: "Back to Year", callback_data: "Download" }],
+            [{text: "Back to MainMenu", callback_data: "Main"}]
+          ]
+        }
+      });
+    }else {
+      ctx.telegram.sendMessage(id, "Page 4 - Clinical Anki Files" + "\n" + "No Results", {
+        parse_mode: "HTML",
+        reply_markup: {
+          inline_keyboard: [
+            [{text: "Page 1", callback_data: "Preclinical"}, {text: "Page 2", callback_data: "Next2P"},{text: "Page 3", callback_data: "Next3P"}, {text: "🟩4🟩", callback_data: "Next4P"}],
+            [{text: "Page 5", callback_data: "Next5P"},{text: "Page 6", callback_data: "Next6P"}, {text: "Page 7", callback_data: "Next7P"}, {text: "Page 8", callback_data: "Next8P"}],
+            [{text: "Back to Year", callback_data: "Download" }],
+            [{text: "Back to MainMenu", callback_data: "Main"}]
+          ]
+        }
+      });
+    }
+  })   
+
+})
+
+bot.action('Next5C', (ctx) => {
+  var id = ctx.chat.id;
+  ctx.deleteMessage();
+  var Year = "Clinical";
+
+  listFilesByYear(Year)
+  .then((result) =>{
+    var fifthPage = result.slice(20,25);
+    var NumOfResults = fifthPage.length;
+
+    console.log(NumOfResults);
+    console.log(fifthPage);
+
+    if(result.length > 20){
+      result.length = 9;
+    }
+    
+    if (NumOfResults != 0){
+      ctx.telegram.sendMessage(id, "Page 5 - Clinical Anki Files" + "\n" + fifthPage, {
+        parse_mode: "HTML",
+        reply_markup: {
+          inline_keyboard: [
+            [{text: "Page 1", callback_data: "Preclinical"}, {text: "Page 2", callback_data: "Next2P"},{text: "Page 3", callback_data: "Next3P"}, {text: "Page 4", callback_data: "Next4P"}],
+            [{text: "🟩5🟩", callback_data: "Next5P"},{text: "Page 6", callback_data: "Next6P"}, {text: "Page 7", callback_data: "Next7P"}, {text: "Page 8", callback_data: "Next8P"}],
+            [{text: "Back to Year", callback_data: "Download" }],
+            [{text: "Back to MainMenu", callback_data: "Main"}]
+          ]
+        }
+      });
+    }else {
+      ctx.telegram.sendMessage(id, "Page 5 - Clinical Anki Files" + "\n" + "No Results", {
+        parse_mode: "HTML",
+        reply_markup: {
+          inline_keyboard: [
+            [{text: "Page 1", callback_data: "Preclinical"}, {text: "Page 2", callback_data: "Next2P"},{text: "Page 3", callback_data: "Next3P"}, {text: "Page 4", callback_data: "Next4P"}],
+            [{text: "🟩5🟩", callback_data: "Next5P"},{text: "Page 6", callback_data: "Next6P"}, {text: "Page 7", callback_data: "Next7P"}, {text: "Page 8", callback_data: "Next8P"}],
+            [{text: "Back to Year", callback_data: "Download" }],
+            [{text: "Back to MainMenu", callback_data: "Main"}]
+          ]
+        }
+      });
+    }
+  })   
+
+})
+
+bot.action('Next6C', (ctx) => {
+  var id = ctx.chat.id;
+  ctx.deleteMessage();
+  var Year = "Clinical";
+
+  listFilesByYear(Year)
+  .then((result) =>{
+    var sixthPage = result.slice(25,30);
+    var NumOfResults = sixthPage.length;
+
+    console.log(NumOfResults);
+    console.log(sixthPage);
+
+    if(result.length > 20){
+      result.length = 9;
+    }
+    
+    if (NumOfResults != 0){
+      ctx.telegram.sendMessage(id, "Page 6 - Clinical Anki Files" + "\n" + sixthPage, {
+        parse_mode: "HTML",
+        reply_markup: {
+          inline_keyboard: [
+            [{text: "Page 1", callback_data: "Preclinical"}, {text: "Page 2", callback_data: "Next2P"},{text: "Page 3", callback_data: "Next3P"}, {text: "Page 4", callback_data: "Next4P"}],
+            [{text: "Page 5", callback_data: "Next5P"},{text: "🟩6🟩", callback_data: "Next6P"}, {text: "Page 7", callback_data: "Next7P"}, {text: "Page 8", callback_data: "Next8P"}],
+            [{text: "Back to Year", callback_data: "Download" }],
+            [{text: "Back to MainMenu", callback_data: "Main"}]
+          ]
+        }
+      });
+    }else {
+      ctx.telegram.sendMessage(id, "Page 6 - Clinical Anki Files" + "\n" + "No Results", {
+        parse_mode: "HTML",
+        reply_markup: {
+          inline_keyboard: [
+            [{text: "Page 1", callback_data: "Preclinical"}, {text: "Page 2", callback_data: "Next2P"},{text: "Page 3", callback_data: "Next3P"}, {text: "Page 4", callback_data: "Next4P"}],
+            [{text: "Page 5", callback_data: "Next5P"},{text: "🟩6🟩", callback_data: "Next6P"}, {text: "Page 7", callback_data: "Next7P"}, {text: "Page 8", callback_data: "Next8P"}],
+            [{text: "Back to Year", callback_data: "Download" }],
+            [{text: "Back to MainMenu", callback_data: "Main"}]
+          ]
+        }
+      });
+    }
+  })   
+
+})
+
+bot.action('Next7C', (ctx) => {
+  var id = ctx.chat.id;
+  ctx.deleteMessage();
+  var Year = "Clinical";
+
+  listFilesByYear(Year)
+  .then((result) =>{
+    var seventhPage = result.slice(30,35);
+    var NumOfResults = seventhPage.length;
+
+    console.log(NumOfResults);
+    console.log(seventhPage);
+
+    if(result.length > 20){
+      result.length = 9;
+    }
+    
+    if (NumOfResults != 0){
+      ctx.telegram.sendMessage(id, "Page 7 - Clinical Anki Files" + "\n" + seventhPage, {
+        parse_mode: "HTML",
+        reply_markup: {
+          inline_keyboard: [
+            [{text: "Page 1", callback_data: "Preclinical"}, {text: "Page 2", callback_data: "Next2P"},{text: "Page 3", callback_data: "Next3P"}, {text: "Page 4", callback_data: "Next4P"}],
+            [{text: "Page 5", callback_data: "Next5P"},{text: "Page 6", callback_data: "Next6P"}, {text: "🟩7🟩", callback_data: "Next7P"}, {text: "Page 8", callback_data: "Next8P"}],
+            [{text: "Back to Year", callback_data: "Download" }],
+            [{text: "Back to MainMenu", callback_data: "Main"}]
+          ]
+        }
+      });
+    }else {
+      ctx.telegram.sendMessage(id, "Page 7 - Clinical Anki Files" + "\n" + "No Results", {
+        parse_mode: "HTML",
+        reply_markup: {
+          inline_keyboard: [
+            [{text: "Page 1", callback_data: "Preclinical"}, {text: "Page 2", callback_data: "Next2P"},{text: "Page 3", callback_data: "Next3P"}, {text: "Page 4", callback_data: "Next4P"}],
+            [{text: "Page 5", callback_data: "Next5P"},{text: "Page 6", callback_data: "Next6P"}, {text: "🟩7🟩", callback_data: "Next7P"}, {text: "Page 8", callback_data: "Next8P"}],
+            [{text: "Back to Year", callback_data: "Download" }],
+            [{text: "Back to MainMenu", callback_data: "Main"}]
+          ]
+        }
+      });
+    }
+  })   
+
+})
+
+bot.action('Next8C', (ctx) => {
+  var id = ctx.chat.id;
+  ctx.deleteMessage();
+  var Year = "Clinical";
+
+  listFilesByYear(Year)
+  .then((result) =>{
+    var eighthPage = result.slice(35,40);
+    var NumOfResults = eighthPage.length;
+
+    console.log(NumOfResults);
+    console.log(eighthPage);
+
+    if(result.length > 20){
+      result.length = 9;
+    }
+    
+    if (NumOfResults != 0){
+      ctx.telegram.sendMessage(id, "Page 8 - Clinical Anki Files" + "\n" + eighthPage + "\n" + "\n" + "For more results, use the <b>Search</b> button", {
+        parse_mode: "HTML",
+        reply_markup: {
+          inline_keyboard: [
+            [{text: "Page 1", callback_data: "Preclinical"}, {text: "Page 2", callback_data: "Next2P"},{text: "Page 3", callback_data: "Next3P"}, {text: "Page 4", callback_data: "Next4P"}],
+            [{text: "Page 5", callback_data: "Next5P"},{text: "Page 6", callback_data: "Next6P"}, {text: "Page 7", callback_data: "Next7P"}, {text: "🟩8🟩", callback_data: "Next8P"}],
+            [{text: "Back to Year", callback_data: "Download" }],
+            [{text: "Back to MainMenu", callback_data: "Main"}]
+          ]
+        }
+      });
+    }else {
+      ctx.telegram.sendMessage(id, "Page 8 - Clinical Anki Files" + "\n" + "No Results" + "\n" + "For more results, use the <b>Search</b> button", {
+        parse_mode: "HTML",
+        reply_markup: {
+          inline_keyboard: [
+            [{text: "Page 1", callback_data: "Preclinical"}, {text: "Page 2", callback_data: "Next2P"},{text: "Page 3", callback_data: "Next3P"}, {text: "Page 4", callback_data: "Next4P"}],
+            [{text: "Page 5", callback_data: "Next5P"},{text: "Page 6", callback_data: "Next6P"}, {text: "Page 7", callback_data: "Next7P"}, {text: "🟩8🟩", callback_data: "Next8P"}],
+            [{text: "Back to Year", callback_data: "Download" }],
+            [{text: "Back to MainMenu", callback_data: "Main"}]
+          ]
+        }
+      });
+    }
+
+  })   
+
 })
 
 
@@ -578,38 +904,3 @@ bot.action('Main', (ctx) => {
 
 bot.launch();
 
-/*
-{
-  webhook: {
-    domain: "https://brick-red-rattlesnake-yoke.cyclic.app",
-      port: 3000 // I've seen 3000 is frequently used so let's use that
-  }
-}
-
-bot.command('NxtPage', (ctx) => {
-  var id = ctx.chat.id;
-  var messageId = ctx.update.message.message_id;
-  var Year = "Preclinical";
-
-  console.log(ctx.update)
-  //ctx.telegram.editMessageText(id,messageId, "Hello")
-
-})
-  listFilesByYear(Year)
-  .then((result) =>{
-    var NumOfResults = result.length;
-    var Page2Results = [];
-    Page2Results.push(result[13])
-   
-    ctx.editMessageText(id, messageId, "Page 2 of Preclinical Anki Files" + "\n" + result, {
-      parse_mode: "HTML",
-      reply_markup: {
-        inline_keyboard: [
-          [{text: "Back to Year", callback_data: "Download" }],
-          [{text: "Back to MainMenu", callback_data: "Main"}]
-        ]
-      }
-    })
-
-  })
-*/
