@@ -584,8 +584,8 @@ bot.action('Next2C', (ctx) => {
         parse_mode: "HTML",
         reply_markup: {
           inline_keyboard: [
-            [{text: "Page 1", callback_data: "Preclinical"}, {text: "🟩2🟩", callback_data: "Next2P"},{text: "Page 3", callback_data: "Next3P"}, {text: "Page 4", callback_data: "Next4P"}],
-            [{text: "Page 5", callback_data: "Next5P"},{text: "Page 6", callback_data: "Next6P"}, {text: "Page 7", callback_data: "Next7P"}, {text: "Page 8", callback_data: "Next8P"}],
+            [{text: "Page 1", callback_data: "Clinical"}, {text: "🟩2🟩", callback_data: "Next2C"},{text: "Page 3", callback_data: "Next3C"}, {text: "Page 4", callback_data: "Next4C"}],
+            [{text: "Page 5", callback_data: "Next5C"},{text: "Page 6", callback_data: "Next6C"}, {text: "Page 7", callback_data: "Next7C"}, {text: "Page 8", callback_data: "Next8C"}],
             [{text: "Back to Year", callback_data: "Download" }],
             [{text: "Back to MainMenu", callback_data: "Main"}]
           ]
@@ -596,8 +596,8 @@ bot.action('Next2C', (ctx) => {
         parse_mode: "HTML",
         reply_markup: {
           inline_keyboard: [
-            [{text: "Page 1", callback_data: "Preclinical"}, {text: "🟩2🟩", callback_data: "Next2P"},{text: "Page 3", callback_data: "Next3P"}, {text: "Page 4", callback_data: "Next4P"}],
-            [{text: "Page 5", callback_data: "Next5P"},{text: "Page 6", callback_data: "Next6P"}, {text: "Page 7", callback_data: "Next7P"}, {text: "Page 8", callback_data: "Next8P"}],
+            [{text: "Page 1", callback_data: "Clinical"}, {text: "🟩2🟩", callback_data: "Next2C"},{text: "Page 3", callback_data: "Next3C"}, {text: "Page 4", callback_data: "Next4C"}],
+            [{text: "Page 5", callback_data: "Next5C"},{text: "Page 6", callback_data: "Next6C"}, {text: "Page 7", callback_data: "Next7C"}, {text: "Page 8", callback_data: "Next8C"}],
             [{text: "Back to Year", callback_data: "Download" }],
             [{text: "Back to MainMenu", callback_data: "Main"}]
           ]
@@ -632,8 +632,8 @@ bot.action('Next3C', (ctx) => {
         parse_mode: "HTML",
         reply_markup: {
           inline_keyboard: [
-            [{text: "Page 1", callback_data: "Preclinical"}, {text: "Page 2", callback_data: "Next2P"},{text: "🟩3🟩", callback_data: "Next3P"}, {text: "Page 4", callback_data: "Next4P"}],
-            [{text: "Page 5", callback_data: "Next5P"},{text: "Page 6", callback_data: "Next6P"}, {text: "Page 7", callback_data: "Next7P"}, {text: "Page 8", callback_data: "Next8P"}],
+            [{text: "Page 1", callback_data: "Clinical"}, {text: "Page 2", callback_data: "Next2C"},{text: "🟩3🟩", callback_data: "Next3C"}, {text: "Page 4", callback_data: "Next4C"}],
+            [{text: "Page 5", callback_data: "Next5C"},{text: "Page 6", callback_data: "Next6C"}, {text: "Page 7", callback_data: "Next7C"}, {text: "Page 8", callback_data: "Next8C"}],
             [{text: "Back to Year", callback_data: "Download" }],
             [{text: "Back to MainMenu", callback_data: "Main"}]
           ]
@@ -644,8 +644,8 @@ bot.action('Next3C', (ctx) => {
         parse_mode: "HTML",
         reply_markup: {
           inline_keyboard: [
-            [{text: "Page 1", callback_data: "Preclinical"}, {text: "Page 2", callback_data: "Next2P"},{text: "🟩3🟩", callback_data: "Next3P"}, {text: "Page 4", callback_data: "Next4P"}],
-            [{text: "Page 5", callback_data: "Next5P"},{text: "Page 6", callback_data: "Next6P"}, {text: "Page 7", callback_data: "Next7P"}, {text: "Page 8", callback_data: "Next8P"}],
+            [{text: "Page 1", callback_data: "Clinical"}, {text: "Page 2", callback_data: "Next2C"},{text: "🟩3🟩", callback_data: "Next3C"}, {text: "Page 4", callback_data: "Next4C"}],
+            [{text: "Page 5", callback_data: "Next5C"},{text: "Page 6", callback_data: "Next6C"}, {text: "Page 7", callback_data: "Next7C"}, {text: "Page 8", callback_data: "Next8C"}],
             [{text: "Back to Year", callback_data: "Download" }],
             [{text: "Back to MainMenu", callback_data: "Main"}]
           ]
@@ -678,8 +678,8 @@ bot.action('Next4C', (ctx) => {
         parse_mode: "HTML",
         reply_markup: {
           inline_keyboard: [
-            [{text: "Page 1", callback_data: "Preclinical"}, {text: "Page 2", callback_data: "Next2P"},{text: "Page 3", callback_data: "Next3P"}, {text: "🟩4🟩", callback_data: "Next4P"}],
-            [{text: "Page 5", callback_data: "Next5P"},{text: "Page 6", callback_data: "Next6P"}, {text: "Page 7", callback_data: "Next7P"}, {text: "Page 8", callback_data: "Next8P"}],
+            [{text: "Page 1", callback_data: "Clinical"}, {text: "Page 2", callback_data: "Next2C"},{text: "Page 3", callback_data: "Next3C"}, {text: "🟩4🟩", callback_data: "Next4C"}],
+            [{text: "Page 5", callback_data: "Next5C"},{text: "Page 6", callback_data: "Next6C"}, {text: "Page 7", callback_data: "Next7C"}, {text: "Page 8", callback_data: "Next8C"}],
             [{text: "Back to Year", callback_data: "Download" }],
             [{text: "Back to MainMenu", callback_data: "Main"}]
           ]
@@ -690,8 +690,8 @@ bot.action('Next4C', (ctx) => {
         parse_mode: "HTML",
         reply_markup: {
           inline_keyboard: [
-            [{text: "Page 1", callback_data: "Preclinical"}, {text: "Page 2", callback_data: "Next2P"},{text: "Page 3", callback_data: "Next3P"}, {text: "🟩4🟩", callback_data: "Next4P"}],
-            [{text: "Page 5", callback_data: "Next5P"},{text: "Page 6", callback_data: "Next6P"}, {text: "Page 7", callback_data: "Next7P"}, {text: "Page 8", callback_data: "Next8P"}],
+            [{text: "Page 1", callback_data: "Clinical"}, {text: "Page 2", callback_data: "Next2C"},{text: "Page 3", callback_data: "Next3C"}, {text: "🟩4🟩", callback_data: "Next4C"}],
+            [{text: "Page 5", callback_data: "Next5C"},{text: "Page 6", callback_data: "Next6C"}, {text: "Page 7", callback_data: "Next7C"}, {text: "Page 8", callback_data: "Next8C"}],
             [{text: "Back to Year", callback_data: "Download" }],
             [{text: "Back to MainMenu", callback_data: "Main"}]
           ]
@@ -724,8 +724,8 @@ bot.action('Next5C', (ctx) => {
         parse_mode: "HTML",
         reply_markup: {
           inline_keyboard: [
-            [{text: "Page 1", callback_data: "Preclinical"}, {text: "Page 2", callback_data: "Next2P"},{text: "Page 3", callback_data: "Next3P"}, {text: "Page 4", callback_data: "Next4P"}],
-            [{text: "🟩5🟩", callback_data: "Next5P"},{text: "Page 6", callback_data: "Next6P"}, {text: "Page 7", callback_data: "Next7P"}, {text: "Page 8", callback_data: "Next8P"}],
+            [{text: "Page 1", callback_data: "Clinical"}, {text: "Page 2", callback_data: "Next2C"},{text: "Page 3", callback_data: "Next3C"}, {text: "Page 4", callback_data: "Next4C"}],
+            [{text: "🟩5🟩", callback_data: "Next5C"},{text: "Page 6", callback_data: "Next6C"}, {text: "Page 7", callback_data: "Next7C"}, {text: "Page 8", callback_data: "Next8C"}],
             [{text: "Back to Year", callback_data: "Download" }],
             [{text: "Back to MainMenu", callback_data: "Main"}]
           ]
@@ -736,8 +736,8 @@ bot.action('Next5C', (ctx) => {
         parse_mode: "HTML",
         reply_markup: {
           inline_keyboard: [
-            [{text: "Page 1", callback_data: "Preclinical"}, {text: "Page 2", callback_data: "Next2P"},{text: "Page 3", callback_data: "Next3P"}, {text: "Page 4", callback_data: "Next4P"}],
-            [{text: "🟩5🟩", callback_data: "Next5P"},{text: "Page 6", callback_data: "Next6P"}, {text: "Page 7", callback_data: "Next7P"}, {text: "Page 8", callback_data: "Next8P"}],
+            [{text: "Page 1", callback_data: "Clinical"}, {text: "Page 2", callback_data: "Next2C"},{text: "Page 3", callback_data: "Next3C"}, {text: "Page 4", callback_data: "Next4C"}],
+            [{text: "🟩5🟩", callback_data: "Next5C"},{text: "Page 6", callback_data: "Next6C"}, {text: "Page 7", callback_data: "Next7C"}, {text: "Page 8", callback_data: "Next8C"}],
             [{text: "Back to Year", callback_data: "Download" }],
             [{text: "Back to MainMenu", callback_data: "Main"}]
           ]
@@ -770,8 +770,8 @@ bot.action('Next6C', (ctx) => {
         parse_mode: "HTML",
         reply_markup: {
           inline_keyboard: [
-            [{text: "Page 1", callback_data: "Preclinical"}, {text: "Page 2", callback_data: "Next2P"},{text: "Page 3", callback_data: "Next3P"}, {text: "Page 4", callback_data: "Next4P"}],
-            [{text: "Page 5", callback_data: "Next5P"},{text: "🟩6🟩", callback_data: "Next6P"}, {text: "Page 7", callback_data: "Next7P"}, {text: "Page 8", callback_data: "Next8P"}],
+            [{text: "Page 1", callback_data: "Clinical"}, {text: "Page 2", callback_data: "Next2C"},{text: "Page 3", callback_data: "Next3C"}, {text: "Page 4", callback_data: "Next4C"}],
+            [{text: "Page 5", callback_data: "Next5C"},{text: "🟩6🟩", callback_data: "Next6C"}, {text: "Page 7", callback_data: "Next7C"}, {text: "Page 8", callback_data: "Next8C"}],
             [{text: "Back to Year", callback_data: "Download" }],
             [{text: "Back to MainMenu", callback_data: "Main"}]
           ]
@@ -782,8 +782,8 @@ bot.action('Next6C', (ctx) => {
         parse_mode: "HTML",
         reply_markup: {
           inline_keyboard: [
-            [{text: "Page 1", callback_data: "Preclinical"}, {text: "Page 2", callback_data: "Next2P"},{text: "Page 3", callback_data: "Next3P"}, {text: "Page 4", callback_data: "Next4P"}],
-            [{text: "Page 5", callback_data: "Next5P"},{text: "🟩6🟩", callback_data: "Next6P"}, {text: "Page 7", callback_data: "Next7P"}, {text: "Page 8", callback_data: "Next8P"}],
+            [{text: "Page 1", callback_data: "Clinical"}, {text: "Page 2", callback_data: "Next2C"},{text: "Page 3", callback_data: "Next3C"}, {text: "Page 4", callback_data: "Next4C"}],
+            [{text: "Page 5", callback_data: "Next5C"},{text: "🟩6🟩", callback_data: "Next6C"}, {text: "Page 7", callback_data: "Next7C"}, {text: "Page 8", callback_data: "Next8C"}],
             [{text: "Back to Year", callback_data: "Download" }],
             [{text: "Back to MainMenu", callback_data: "Main"}]
           ]
@@ -816,8 +816,8 @@ bot.action('Next7C', (ctx) => {
         parse_mode: "HTML",
         reply_markup: {
           inline_keyboard: [
-            [{text: "Page 1", callback_data: "Preclinical"}, {text: "Page 2", callback_data: "Next2P"},{text: "Page 3", callback_data: "Next3P"}, {text: "Page 4", callback_data: "Next4P"}],
-            [{text: "Page 5", callback_data: "Next5P"},{text: "Page 6", callback_data: "Next6P"}, {text: "🟩7🟩", callback_data: "Next7P"}, {text: "Page 8", callback_data: "Next8P"}],
+            [{text: "Page 1", callback_data: "Clinical"}, {text: "Page 2", callback_data: "Next2C"},{text: "Page 3", callback_data: "Next3C"}, {text: "Page 4", callback_data: "Next4C"}],
+            [{text: "Page 5", callback_data: "Next5C"},{text: "Page 6", callback_data: "Next6C"}, {text: "🟩7🟩", callback_data: "Next7C"}, {text: "Page 8", callback_data: "Next8C"}],
             [{text: "Back to Year", callback_data: "Download" }],
             [{text: "Back to MainMenu", callback_data: "Main"}]
           ]
@@ -828,8 +828,8 @@ bot.action('Next7C', (ctx) => {
         parse_mode: "HTML",
         reply_markup: {
           inline_keyboard: [
-            [{text: "Page 1", callback_data: "Preclinical"}, {text: "Page 2", callback_data: "Next2P"},{text: "Page 3", callback_data: "Next3P"}, {text: "Page 4", callback_data: "Next4P"}],
-            [{text: "Page 5", callback_data: "Next5P"},{text: "Page 6", callback_data: "Next6P"}, {text: "🟩7🟩", callback_data: "Next7P"}, {text: "Page 8", callback_data: "Next8P"}],
+            [{text: "Page 1", callback_data: "Clinical"}, {text: "Page 2", callback_data: "Next2C"},{text: "Page 3", callback_data: "Next3C"}, {text: "Page 4", callback_data: "Next4C"}],
+            [{text: "Page 5", callback_data: "Next5C"},{text: "Page 6", callback_data: "Next6C"}, {text: "🟩7🟩", callback_data: "Next7C"}, {text: "Page 8", callback_data: "Next8C"}],
             [{text: "Back to Year", callback_data: "Download" }],
             [{text: "Back to MainMenu", callback_data: "Main"}]
           ]
@@ -862,8 +862,8 @@ bot.action('Next8C', (ctx) => {
         parse_mode: "HTML",
         reply_markup: {
           inline_keyboard: [
-            [{text: "Page 1", callback_data: "Preclinical"}, {text: "Page 2", callback_data: "Next2P"},{text: "Page 3", callback_data: "Next3P"}, {text: "Page 4", callback_data: "Next4P"}],
-            [{text: "Page 5", callback_data: "Next5P"},{text: "Page 6", callback_data: "Next6P"}, {text: "Page 7", callback_data: "Next7P"}, {text: "🟩8🟩", callback_data: "Next8P"}],
+            [{text: "Page 1", callback_data: "Clinical"}, {text: "Page 2", callback_data: "Next2C"},{text: "Page 3", callback_data: "Next3C"}, {text: "Page 4", callback_data: "Next4C"}],
+            [{text: "Page 5", callback_data: "Next5C"},{text: "Page 6", callback_data: "Next6C"}, {text: "Page 7", callback_data: "Next7C"}, {text: "🟩8🟩", callback_data: "Next8C"}],
             [{text: "Back to Year", callback_data: "Download" }],
             [{text: "Back to MainMenu", callback_data: "Main"}]
           ]
@@ -874,8 +874,8 @@ bot.action('Next8C', (ctx) => {
         parse_mode: "HTML",
         reply_markup: {
           inline_keyboard: [
-            [{text: "Page 1", callback_data: "Preclinical"}, {text: "Page 2", callback_data: "Next2P"},{text: "Page 3", callback_data: "Next3P"}, {text: "Page 4", callback_data: "Next4P"}],
-            [{text: "Page 5", callback_data: "Next5P"},{text: "Page 6", callback_data: "Next6P"}, {text: "Page 7", callback_data: "Next7P"}, {text: "🟩8🟩", callback_data: "Next8P"}],
+            [{text: "Page 1", callback_data: "Clinical"}, {text: "Page 2", callback_data: "Next2C"},{text: "Page 3", callback_data: "Next3C"}, {text: "Page 4", callback_data: "Next4C"}],
+            [{text: "Page 5", callback_data: "Next5C"},{text: "Page 6", callback_data: "Next6C"}, {text: "Page 7", callback_data: "Next7C"}, {text: "🟩8🟩", callback_data: "Next8C"}],
             [{text: "Back to Year", callback_data: "Download" }],
             [{text: "Back to MainMenu", callback_data: "Main"}]
           ]
