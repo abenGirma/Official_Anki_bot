@@ -122,7 +122,11 @@ const downloadAnswer = `
 
 bot.action('Download', (ctx) => {
   var id = ctx.chat.id;
-  ctx.deleteMessage();
+  try {
+    ctx.deleteMessage()
+  }catch(error){
+    console.log(error);
+  };
 
     ctx.telegram.sendMessage(id, downloadAnswer, {
       parse_mode: "HTML",
@@ -182,7 +186,12 @@ bot.on('inline_query', async ctx => {
 
 bot.action('Preclinical', (ctx) => {
   var id = ctx.chat.id;
-  ctx.deleteMessage();
+  try {
+    ctx.deleteMessage()
+  }catch(error){
+    console.log(error);
+  }
+  
   var Year = "Preclinical";
   
   listFilesByYear(Year)
@@ -211,7 +220,11 @@ bot.action('Preclinical', (ctx) => {
 
 bot.action('Next2P', (ctx) => {
   var id = ctx.chat.id;
-  ctx.deleteMessage();
+  try {
+    ctx.deleteMessage()
+  }catch(error){
+    console.log(error);
+  };
   var Year = "Preclinical";
 
   listFilesByYear(Year)
@@ -257,7 +270,11 @@ bot.action('Next2P', (ctx) => {
 
 bot.action('Next3P', (ctx) => {
   var id = ctx.chat.id;
-  ctx.deleteMessage();
+  try {
+    ctx.deleteMessage()
+  }catch(error){
+    console.log(error);
+  };
   var Year = "Preclinical";
 
   listFilesByYear(Year)
@@ -303,7 +320,11 @@ bot.action('Next3P', (ctx) => {
 
 bot.action('Next4P', (ctx) => {
   var id = ctx.chat.id;
-  ctx.deleteMessage();
+  try {
+    ctx.deleteMessage()
+  }catch(error){
+    console.log(error);
+  };
   var Year = "Preclinical";
 
   listFilesByYear(Year)
@@ -349,7 +370,11 @@ bot.action('Next4P', (ctx) => {
 
 bot.action('Next5P', (ctx) => {
   var id = ctx.chat.id;
-  ctx.deleteMessage();
+  try {
+    ctx.deleteMessage()
+  }catch(error){
+    console.log(error);
+  };
   var Year = "Preclinical";
 
   listFilesByYear(Year)
@@ -395,7 +420,11 @@ bot.action('Next5P', (ctx) => {
 
 bot.action('Next6P', (ctx) => {
   var id = ctx.chat.id;
-  ctx.deleteMessage();
+  try {
+    ctx.deleteMessage()
+  }catch(error){
+    console.log(error);
+  };
   var Year = "Preclinical";
 
   listFilesByYear(Year)
@@ -441,7 +470,11 @@ bot.action('Next6P', (ctx) => {
 
 bot.action('Next7P', (ctx) => {
   var id = ctx.chat.id;
-  ctx.deleteMessage();
+  try {
+    ctx.deleteMessage()
+  }catch(error){
+    console.log(error);
+  };
   var Year = "Preclinical";
 
   listFilesByYear(Year)
@@ -487,7 +520,11 @@ bot.action('Next7P', (ctx) => {
 
 bot.action('Next8P', (ctx) => {
   var id = ctx.chat.id;
-  ctx.deleteMessage();
+  try {
+    ctx.deleteMessage()
+  }catch(error){
+    console.log(error);
+  };
   var Year = "Preclinical";
 
   listFilesByYear(Year)
@@ -537,7 +574,11 @@ bot.action('Clinical', (ctx) => {
   var id = ctx.chat.id;
   var messageId = ctx.update.callback_query.message.message_id;
   //console.log(messageId);
-  ctx.deleteMessage();
+  try {
+    ctx.deleteMessage()
+  }catch(error){
+    console.log(error);
+  };
   var Year = "Clinical";
 
   listFilesByYear(Year)
@@ -566,7 +607,11 @@ bot.action('Clinical', (ctx) => {
 
 bot.action('Next2C', (ctx) => {
   var id = ctx.chat.id;
-  ctx.deleteMessage();
+  try {
+    ctx.deleteMessage()
+  }catch(error){
+    console.log(error);
+  };
   var Year = "Clinical";
 
   listFilesByYear(Year)
@@ -612,7 +657,11 @@ bot.action('Next2C', (ctx) => {
 
 bot.action('Next3C', (ctx) => {
   var id = ctx.chat.id;
-  ctx.deleteMessage();
+  try {
+    ctx.deleteMessage()
+  }catch(error){
+    console.log(error);
+  };
   var Year = "Clinical";
 
   listFilesByYear(Year)
@@ -658,7 +707,11 @@ bot.action('Next3C', (ctx) => {
 
 bot.action('Next4C', (ctx) => {
   var id = ctx.chat.id;
-  ctx.deleteMessage();
+  try {
+    ctx.deleteMessage()
+  }catch(error){
+    console.log(error);
+  };
   var Year = "Clinical";
 
   listFilesByYear(Year)
@@ -704,7 +757,11 @@ bot.action('Next4C', (ctx) => {
 
 bot.action('Next5C', (ctx) => {
   var id = ctx.chat.id;
-  ctx.deleteMessage();
+  try {
+    ctx.deleteMessage()
+  }catch(error){
+    console.log(error);
+  };
   var Year = "Clinical";
 
   listFilesByYear(Year)
@@ -750,7 +807,11 @@ bot.action('Next5C', (ctx) => {
 
 bot.action('Next6C', (ctx) => {
   var id = ctx.chat.id;
-  ctx.deleteMessage();
+  try {
+    ctx.deleteMessage()
+  }catch(error){
+    console.log(error);
+  };
   var Year = "Clinical";
 
   listFilesByYear(Year)
@@ -796,7 +857,11 @@ bot.action('Next6C', (ctx) => {
 
 bot.action('Next7C', (ctx) => {
   var id = ctx.chat.id;
-  ctx.deleteMessage();
+  try {
+    ctx.deleteMessage()
+  }catch(error){
+    console.log(error);
+  };
   var Year = "Clinical";
 
   listFilesByYear(Year)
@@ -842,7 +907,11 @@ bot.action('Next7C', (ctx) => {
 
 bot.action('Next8C', (ctx) => {
   var id = ctx.chat.id;
-  ctx.deleteMessage();
+  try {
+    ctx.deleteMessage()
+  }catch(error){
+    console.log(error);
+  };
   var Year = "Clinical";
 
   listFilesByYear(Year)
@@ -890,7 +959,11 @@ bot.action('Next8C', (ctx) => {
 
 bot.action('Main', (ctx) => {
   var id = ctx.chat.id;
-  ctx.deleteMessage()
+  try {
+    ctx.deleteMessage()
+  }catch(error){
+    console.log(error);
+  }
   ctx.telegram.sendMessage(id, answer, {
     parse_mode: "markdown",
     reply_markup: {
