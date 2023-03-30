@@ -35,13 +35,13 @@ bot.catch((err, ctx) => {
 //On the start command, it sends two buttons - Upload and Download
 bot.start((ctx) => {
   var id = ctx.chat.id;
-  let currentPage = 1;
-  let res = axios.get(RestAPIurl)
-  let result = res.data[0].data;
-  console.log(result[1]);
-  handlePagination(msg, result, currentPage);
+  //let currentPage = 1;
+  //let res = axios.get(RestAPIurl)
+  //let result = res.data[0].data;
+  //console.log(result[1]);
+  //handlePagination(msg, result, currentPage);
 
-  /*
+  
   ctx.telegram.sendMessage(id, answer, {
     parse_mode: "markdown",
     reply_markup: {
@@ -52,7 +52,7 @@ bot.start((ctx) => {
       ]
     }
   });
-  */
+  
 
 })
 
