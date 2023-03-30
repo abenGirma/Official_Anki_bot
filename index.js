@@ -237,11 +237,22 @@ bot.on('inline_query', async ctx => {
 
             if (results.length > 20){
                 results.length = 15
-            } 
-           
-            console.log(results);
-            ctx.answerInlineQuery(results, {cache_time: 300});
-            
+                console.log(results);
+                ctx.answerInlineQuery(results, {cache_time: 300});
+            }else if(results.length = 0){
+
+              console.log(results);
+              ctx.answerInlineQuery({
+                  type:'article', 
+                  id: String(index),
+                  title: "Results Not found", 
+                  description: "No results",
+                  parse_mode: "HTML"
+                  }, 
+                  {cache_time: 300}
+                );
+            }
+          
         })
     console.log(query);
 })
