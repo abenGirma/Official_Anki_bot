@@ -244,7 +244,7 @@ bot.on('inline_query', async ctx => {
               console.log(results);
               ctx.answerInlineQuery({
                   type:'article', 
-                  id: String(index),
+                  id: 1000,
                   title: "Results Not found", 
                   description: "No results",
                   parse_mode: "HTML"
