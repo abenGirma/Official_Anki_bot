@@ -38,7 +38,7 @@ bot.start((ctx) => {
   let currentPage = 1;
   let res = axios.get(RestAPIurl)
   let result = res.data[0].data;
-
+  console.log(result[1]);
   handlePagination(msg, result, currentPage);
 
   /*
