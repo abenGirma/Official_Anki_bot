@@ -39,7 +39,7 @@ bot.start((ctx) => {
   let res = axios.get(RestAPIurl)
   let result = res.data[0].data;
 
-  handlePagination(ctx, result, currentPage);
+  handlePagination(id, result, currentPage);
 
   /*
   ctx.telegram.sendMessage(id, answer, {
@@ -147,7 +147,7 @@ function paginationButtons(currentPage, totalPages, callback) {
   };
 }
 
-function handlePagination(msg, data, currentPage) {
+function handlePagination(chatid, data, currentPage) {
   const itemsPerPage = 5;
   const totalPages = Math.ceil(data.length / itemsPerPage);
 
@@ -162,9 +162,9 @@ function handlePagination(msg, data, currentPage) {
     reply_markup: keyboard
   };
 
-  const chatId = msg.chat.id;
+  //const chatId = msg.chat.id;
 
-  bot.sendMessage(chatId, `Page ${currentPage}\\n\\n${items.join("\\n")}`, options);
+  bot.sendMessage(chatid, `Page ${currentPage}\\n\\n${items.join("\\n")}`, options);
 }
 
 //resultsByPage("Preclinical");
