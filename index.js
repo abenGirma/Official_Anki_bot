@@ -30,7 +30,7 @@ This bot is made by the SCOME National team. The cards didn't go under any revie
 /start - To start the bot
 🔹🔹🔹🔹🔹🔹🔹🔹🔹🔹🔹🔹🔹🔹🔹🔹🔹
 `;
-//const RestAPIurl = "https://script.google.com/macros/s/AKfycbwE0kSz-GE06Pgs-4CStv6B1l7JnKnel_NUNpgbwtcT-PyyTSHN/exec";
+
 const RestAPIurl = process.env.RestApiUrl;
 
 bot.catch((err, ctx) => {
