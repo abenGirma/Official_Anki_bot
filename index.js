@@ -2,7 +2,7 @@ const fs = require('fs');
 const path = require('path');
 const { google } = require('googleapis');
 const { drive } = require('googleapis/build/src/apis/drive');
-const { HttpsProxyAgent } = require {'https-proxy-agent'}
+const { HttpsProxyAgent } = require ('https-proxy-agent');
 
 require("dotenv").config();
 const axios = require('axios');
@@ -41,12 +41,6 @@ bot.catch((err, ctx) => {
 //On the start command, it sends two buttons - Upload and Download
 bot.start((ctx) => {
   var id = ctx.chat.id;
-  //let currentPage = 1;
-  //let res = axios.get(RestAPIurl)
-  //let result = res.data[0].data;
-  //console.log(result[1]);
-  //handlePagination(msg, result, currentPage);
-
   
   ctx.telegram.sendMessage(id, answer, {
     parse_mode: "markdown",
@@ -66,9 +60,7 @@ bot.start((ctx) => {
 async function listFilesByYear(Year) {
   let res = await axios.get(RestAPIurl)
   result = res.data[0].data;
-  //console.log(result); 
 
-  //filesByYear = result.filter((elem) => {return elem.Year.toString().includes(Year) == true});
   filesByYear = result.filter((elem) => {return elem.Year.toString() == Year});
 
   fileDescription = filesByYear.map((elem, index) => (
@@ -118,62 +110,7 @@ async function resultsByPage(Year) {
 
 }
 
-//Pagination function
-function paginationButtons(currentPage, totalPages, callback) {
-  let buttons = [];
 
-  for (let i = currentPage - 2; i <= currentPage + 2; i++) {
-    if (i > 0 && i <= totalPages) {
-      buttons.push({
-        text: `${i}`,
-        callback_data: `page-${i}`
-      });
-    }
-  }
-
-  if (currentPage > 3) {
-    buttons.unshift({
-      text: "<<",
-      callback_data: `page-${1}`
-    });
-  }
-
-  if (currentPage < totalPages - 2) {
-    buttons.push({
-      text: ">>",
-      callback_data: `page-${totalPages}`
-    });
-  }
-
-  let keyboard = [];
-  keyboard.push(buttons);
-
-  return {
-    inline_keyboard: keyboard
-  };
-}
-
-function handlePagination(msg, data, currentPage) {
-  const itemsPerPage = 5;
-  const totalPages = Math.ceil(data.length / itemsPerPage);
-
-  const start = (currentPage - 1) * itemsPerPage;
-  const end = currentPage * itemsPerPage;
-
-  const items = data.slice(start, end);
-
-  const keyboard = paginationButtons(currentPage, totalPages, handlePagination);
-
-  const options = {
-    reply_markup: keyboard
-  };
-
-  const chatId = msg.chat.id;
-
-  bot.sendMessage(chatId, `Page ${currentPage}\\n\\n${items.join("\\n")}`, options);
-}
-
-//resultsByPage("Preclinical");
 
 const downloadAnswer = `
 🔹🔹🔹🔹🔹🔹🔹🔹🔹🔹🔹🔹🔹🔹🔹🔹🔹
