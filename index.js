@@ -12,12 +12,15 @@ const Telegraf = require('telegraf');
 
 const token = process.env.Token;
 
-const bot = new Telegraf(token, {
+const bot = new Telegraf(token);
+
+/**
+ * , {
   telegram: {
     agent: new HttpsProxyAgent('http://127.0.0.1:3333')
   }
-});
-
+}
+ */
 //const bot = new Composer
 const answer = `
 🔹🔹🔹🔹*Welcome to Anki-Bot*🔹🔹🔹🔹🔹
