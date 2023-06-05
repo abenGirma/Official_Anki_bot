@@ -182,7 +182,7 @@ bot.on('inline_query', async ctx => {
                 results.length = 15
                 console.log(results);
                 ctx.answerInlineQuery(results, {cache_time: 300});
-            }else if(results.length = 0){
+            } /*else if(results.length = 0){
 
               console.log(results);
               ctx.answerInlineQuery({
@@ -194,7 +194,7 @@ bot.on('inline_query', async ctx => {
                   }, 
                   {cache_time: 300}
                 );
-            }
+            }*/
           
         })
     console.log(query);
