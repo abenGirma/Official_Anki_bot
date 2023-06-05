@@ -9,7 +9,7 @@
   "dependencies": {
     "axios": "^0.27.2",
     "blob": "^0.1.0",
-    "dotenv": "^16.0.2",
+    "dotenv": "^16.1.4",
     "googleapis": "^105.0.0",
     "micro-bot": "^2.5.3",
     "node-fetch": "^3.3.0",
